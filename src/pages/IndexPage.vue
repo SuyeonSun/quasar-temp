@@ -4,8 +4,9 @@
     <component2></component2>
     <component3> </component3>
     <component4></component4>
-    <component5></component5
-  ></q-page>
+    <component5></component5>
+    <component6></component6>
+  </q-page>
 </template>
 
 <script setup>
@@ -14,4 +15,5 @@ import Component2 from "components/Component2";
 import Component3 from "components/Component3";
 import Component4 from "components/Component4";
 import Component5 from "components/Component5";
+import Component6 from "components/Component6";
 </script>
