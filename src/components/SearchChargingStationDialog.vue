@@ -16,10 +16,10 @@
 const props = defineProps({
   isOpenDialog: Boolean,
 });
-const emit = defineEmits(["close:dialog"]);
+const emit = defineEmits(["close:SearchChargingStationDialog"]);
 
 const closeDialog = () => {
-  emit("close:dialog");
+  emit("close:SearchChargingStationDialog");
 };
 </script>
 

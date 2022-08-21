@@ -1,15 +1,16 @@
-import { defineStore } from 'pinia';
+import { defineStore } from "pinia";
 
-export const useCounterStore = defineStore('counter', {
-  state: () => ({
-    counter: 0,
-  }),
-  getters: {
-    doubleCount: (state) => state.counter * 2,
+export const useExampleStore = defineStore("exampleStore", {
+  state: () => {
+    return {
+      isOpenFirstDialog: false,
+      isOpenSecondDialog: false,
+    };
   },
+  getters: {},
   actions: {
-    increment() {
-      this.counter++;
+    handleDialogStatus(dialog, status) {
+      this[dialog] = status;
     },
   },
 });
