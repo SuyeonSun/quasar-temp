@@ -1,77 +1,46 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="hHh lpR fFf">
+    <q-header class="bg-dark text-white">
+      <q-toolbar class="row justify-between items-center">
+        <div class="row">
+          <q-toolbar-title class="column items-center q-my-sm q-mx-md">
+            <div class="text-h6 text-weight-bold">EVIQ CSMS</div>
+            <div class="text-caption">ver 1.0.0</div>
+          </q-toolbar-title>
+          <header-item
+            v-for="item in menu"
+            :title="item.title"
+            :path="item.path"
+            :children="item.children"
+          ></header-item>
+        </div>
+        <div class="q-mx-md">user</div>
+      </q-toolbar>
+    </q-header>
+
     <q-page-container>
       <router-view />
     </q-page-container>
   </q-layout>
 </template>
 
-<script>
-import { defineComponent, ref } from "vue";
-import EssentialLink from "components/EssentialLink.vue";
+<script setup>
+import HeaderItem from "components/HeaderItem";
 
-const linksList = [
+const menu = [
   {
-    title: "Docs",
-    caption: "quasar.dev",
-    icon: "school",
-    link: "https://quasar.dev",
+    title: "충전인프라 관리",
+    path: "/",
+    children: [
+      {
+        title: "충전기 관리",
+        path: "/",
+      },
+    ],
   },
   {
-    title: "Github",
-    caption: "github.com/quasarframework",
-    icon: "code",
-    link: "https://github.com/quasarframework",
-  },
-  {
-    title: "Discord Chat Channel",
-    caption: "chat.quasar.dev",
-    icon: "chat",
-    link: "https://chat.quasar.dev",
-  },
-  {
-    title: "Forum",
-    caption: "forum.quasar.dev",
-    icon: "record_voice_over",
-    link: "https://forum.quasar.dev",
-  },
-  {
-    title: "Twitter",
-    caption: "@quasarframework",
-    icon: "rss_feed",
-    link: "https://twitter.quasar.dev",
-  },
-  {
-    title: "Facebook",
-    caption: "@QuasarFramework",
-    icon: "public",
-    link: "https://facebook.quasar.dev",
-  },
-  {
-    title: "Quasar Awesome",
-    caption: "Community Quasar projects",
-    icon: "favorite",
-    link: "https://awesome.quasar.dev",
+    title: "충전 내역",
+    path: "/",
   },
 ];
-
-export default defineComponent({
-  name: "MainLayout",
-
-  components: {
-    EssentialLink,
-  },
-
-  setup() {
-    const leftDrawerOpen = ref(false);
-
-    return {
-      essentialLinks: linksList,
-      leftDrawerOpen,
-      toggleLeftDrawer() {
-        leftDrawerOpen.value = !leftDrawerOpen.value;
-      },
-    };
-  },
-});
 </script>
