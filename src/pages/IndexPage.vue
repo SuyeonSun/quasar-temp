@@ -1,17 +1,19 @@
 <template>
   <q-page class="column justify-center items-center">
-    <component1></component1>
-    <component2></component2>
-    <component3> </component3>
-    <component4></component4>
-    <component5></component5
-  ></q-page>
+    <q-btn color="black" label="등록" @click="handleAddChargeBoxDialog(true)" />
+    <add-charge-box-dialog
+      :isOpenDialog="isOpenAddChargeBoxDialog"
+      @close:dialog="handleAddChargeBoxDialog(false)"
+    ></add-charge-box-dialog>
+  </q-page>
 </template>
 
 <script setup>
-import Component1 from "components/Component1";
-import Component2 from "components/Component2";
-import Component3 from "components/Component3";
-import Component4 from "components/Component4";
-import Component5 from "components/Component5";
+import { ref } from "vue";
+import AddChargeBoxDialog from "components/AddChargeBoxDialog";
+
+const isOpenAddChargeBoxDialog = ref(false);
+const handleAddChargeBoxDialog = (status) => {
+  isOpenAddChargeBoxDialog.value = status;
+};
 </script>
