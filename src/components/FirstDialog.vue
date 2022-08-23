@@ -5,26 +5,46 @@
         <div class="text-h6">충전소 검색</div>
       </q-card-section>
       <q-card-section>
-        <Form>
+        <Form :initial-values="initialValues" v-slot="{ values, resetForm }">
           <q-btn
             label="충전소 검색"
             outline
             color="primary"
-            @click="handleSecondDialog"
+            @click="handleSecondDialog(values)"
           />
 
-          <div v-for="n in 9" :key="n" class="row items-center">
+          <div class="row items-center">
             <div class="col-3">
-              <span>입력란</span>
+              <span>입력란1</span>
               <span class="text-red">*</span>
             </div>
-            <Field :name="n + ' name'" v-slot="{ value, field }">
+            <Field name="input1" v-slot="{ value, field }">
               <q-input :model-value="value" v-bind="field" outlined dense />
             </Field>
           </div>
 
-          <q-btn label="확인" color="primary" unelevated type="submit" />
-          <q-btn label="취소" outline color="black" @click="closeFirstDialog" />
+          <div class="row items-center">
+            <div class="col-3">
+              <span>입력란2</span>
+              <span class="text-red">*</span>
+            </div>
+            <Field name="input2" v-slot="{ value, field }">
+              <q-input :model-value="value" v-bind="field" outlined dense />
+            </Field>
+          </div>
+
+          <q-btn
+            label="취소"
+            outline
+            color="black"
+            @click="
+              [
+                resetForm({ values: initialValues }),
+                initValues(),
+                closeFirstDialog(),
+              ]
+            "
+          />
         </Form>
       </q-card-section>
     </q-card>
@@ -37,15 +57,36 @@ import { useExampleStore } from "stores/example-store";
 import { storeToRefs } from "pinia";
 import { Form, Field } from "vee-validate";
 import SecondDialog from "components/SecondDialog";
+import { watch } from "vue";
 
 const exampleStore = useExampleStore();
-const { isOpenFirstDialog } = storeToRefs(exampleStore);
+const { isOpenFirstDialog, inputValues } = storeToRefs(exampleStore);
 const closeFirstDialog = () => {
   exampleStore.handleDialogStatus("isOpenFirstDialog", false);
 };
-const handleSecondDialog = () => {
+const handleSecondDialog = (values) => {
   exampleStore.handleDialogStatus("isOpenSecondDialog", true);
   closeFirstDialog();
+  inputValues.input1 = values.input1;
+  inputValues.input2 = values.input2;
+};
+
+const initialValues = {
+  input1: undefined,
+  input2: undefined,
+};
+
+watch(isOpenFirstDialog, (value) => {
+  if (true === value) {
+    initialValues.input1 = inputValues.input1;
+    initialValues.input2 = inputValues.input2;
+    console.log("========= input", initialValues.input1);
+    console.log("========= store", inputValues.input1);
+  }
+});
+
+const initValues = () => {
+  exampleStore.initState();
 };
 </script>
 

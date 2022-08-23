@@ -25,7 +25,7 @@ import { useExampleStore } from "stores/example-store";
 
 const isOpenAddChargeBoxDialog = ref(false);
 const handleAddChargeBoxDialog = (status) => {
-  isOpenAddChargeBoxDialog.value = status;
+  isOpenAddChargeBoxDialog.value = status; // store에 값 임시 저장
 };
 
 const exampleStore = useExampleStore();
