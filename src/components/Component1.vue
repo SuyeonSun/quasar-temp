@@ -1,12 +1,17 @@
-<template>
-  <Form v-slot="{ values }">
-    <Field name="selectBox1" v-slot="{ value, field }">
-      <q-select outlined model-value="value" v-bind="field" label="Outlined" />
-    </Field>
-    <Field name="selectBox2" v-slot="{ value, field }"> </Field>
-  </Form>
-</template>
+<script setup>
+import { ref } from "vue";
 
-<script setup></script>
+const inputText = ref("");
+const updateInput = (e) => {
+  const updatedText = e.target.value;
+  inputText.value = updatedText;
+};
+</script>
+
+<template>
+  <!-- 사용자 이벤트에 의해 실행된 뷰 메서드 함수의 첫번째 인자에는 해당 이벤트가 들어옴 -->
+  <input v-bind:value="inputText" v-on:input="updateInput" />
+  {{ inputText }}
+</template>
 
 <style scoped></style>
