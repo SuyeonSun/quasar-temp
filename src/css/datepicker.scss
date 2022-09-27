@@ -1,0 +1,65 @@
+.dp__instance_calendar {
+  //padding: 0 1rem ;
+  margin: 10px;
+}
+
+.dp__date_hover,
+.dp__today {
+  border-radius: 20px;
+}
+
+.dp__cell_auto_range_end,
+.dp__date_hover_end:hover,
+.dp__range_end {
+  border-bottom-right-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.dp__cell_auto_range_start,
+.dp__date_hover_start:hover,
+.dp__range_start {
+  border-bottom-left-radius: 20px;
+  border-top-left-radius: 20px;
+}
+
+.dp__calendar_header_item,
+.dp__calendar_item {
+  font-size: 14px;
+}
+
+.dp__range_start {
+  font-weight: bold;
+  background-color: var(--dp-range-start-color);
+  color: #1D1D1D;
+}
+
+.dp__range_end {
+  font-weight: bold;
+}
+
+.dp__menu {
+  //height: 405px;
+  padding: 20px;
+}
+
+.dp__theme_light {
+  --dp-background-color: #ffffff;
+  --dp-text-color: #212121;
+  --dp-hover-color: #e5eaf1; /* range selected period color */
+  --dp-hover-text-color: #212121;
+  --dp-hover-icon-color: #959595;
+  --dp-primary-color: #1f48a6; /* select-btn, current date, end date */
+  --dp-primary-text-color: #f8f5f5;
+  --dp-secondary-color: #c0c4cc;
+  --dp-border-color: #ddd;
+  --dp-menu-border-color: #ddd;
+  --dp-border-color-hover: #aaaeb7;
+  --dp-disabled-color: #f6f6f6;
+  --dp-scroll-bar-background: #f3f3f3;
+  --dp-scroll-bar-color: #959595;
+  --dp-success-color: #2f54d9;
+  --dp-success-color-disabled: #a3a8d9;
+  --dp-icon-color: #959595;
+  --dp-danger-color: #ff6f60;
+  --dp-range-start-color: #b7c7e5; /* 선택된 날짜 색 */
+}
