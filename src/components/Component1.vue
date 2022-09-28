@@ -6,7 +6,7 @@
       v-model="searchValue"
       type="text"
       placeholder="Search for the EV you'd like to know!"
-      @keyup="updateSearchResult"
+      @keyup="handleInput"
       style="width: 300px"
     >
       <template v-slot:append>
@@ -23,6 +23,8 @@
 
 <script setup>
 import { ref, watch } from "vue";
+
+// handleClick이 작동하면 한번은 searchServer을 하면 안됨
 
 const searchValue = ref("");
 const dataInServer = ["a", "ab", "abc", "d", "e", "f", "g"];
@@ -49,7 +51,7 @@ const searchServer = () => {
 };
 
 // 0.7초 후 입력 값이 없으면, 서버에 요청
-const updateSearchResult = () => {
+const handleInput = () => {
   setTimeout(searchServer, 700);
 };
 
