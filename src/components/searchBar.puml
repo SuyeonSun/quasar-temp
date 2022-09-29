@@ -1,0 +1,17 @@
+@startuml
+
+title Click backToChargeBoxPageBtn
+
+start
+
+:Click backToChargeBoxPageBtn;
+
+:backToChargeBoxPage();
+note right
+<b>description
+* route to the ChargeBoxPage
+end note
+
+stop
+
+@enduml
