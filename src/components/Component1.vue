@@ -1,4 +1,5 @@
 <template>
+  <div>1.</div>
   <div>컴포넌트에 저장하는 데이터: {{ cardData }}</div>
   <div>서버에서 받아온 데이터: {{ storedData }}</div>
   <div class="row q-gutter-xs">

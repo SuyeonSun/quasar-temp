@@ -6,6 +6,9 @@
     <div class="q-mb-md">
       <component2></component2>
     </div>
+    <div class="q-mb-md">
+      <component3></component3>
+    </div>
   </q-page>
 </template>
 
@@ -13,6 +16,4 @@
 import Component1 from "components/Component1";
 import Component2 from "components/Component2";
 import Component3 from "components/Component3";
-import Component4 from "components/Component4";
-import Component5 from "components/Component5";
 </script>

@@ -1,4 +1,5 @@
 <template>
+  <div>2.</div>
   <div>서버에서 받아온 데이터: {{ storedData }}</div>
   <div class="row q-gutter-xs">
     <q-btn

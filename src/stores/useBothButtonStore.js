@@ -12,7 +12,6 @@ export const useBothButtonStore = defineStore("useBothButtonStore", {
       for (let i = this.flag - 2; i < this.flag + 2; i++) {
         this.storedData.push(i);
       }
-      console.log(this.storedData);
     },
     addFlag() {
       this.flag += 2;
