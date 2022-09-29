@@ -1,11 +1,12 @@
 <template>
   <q-page class="column justify-center items-center">
-    <component1></component1>
-    <component2></component2>
-    <component3> </component3>
-    <component4></component4>
-    <component5></component5
-  ></q-page>
+    <div class="q-mb-md">
+      <component1></component1>
+    </div>
+    <div class="q-mb-md">
+      <component2></component2>
+    </div>
+  </q-page>
 </template>
 
 <script setup>
