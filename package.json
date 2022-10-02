@@ -18,7 +18,8 @@
     "vee-validate": "^4.6.6",
     "vue": "^3.0.0",
     "vue-i18n": "^9.0.0",
-    "vue-router": "^4.0.0"
+    "vue-router": "^4.0.0",
+    "vue-social-sharing": "^4.0.0-alpha4"
   },
   "devDependencies": {
     "@quasar/app-webpack": "^3.0.0"

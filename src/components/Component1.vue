@@ -1,10 +1,26 @@
 <template>
-  <Form v-slot="{ values }">
-    <Field name="selectBox1" v-slot="{ value, field }">
-      <q-select outlined model-value="value" v-bind="field" label="Outlined" />
-    </Field>
-    <Field name="selectBox2" v-slot="{ value, field }"> </Field>
-  </Form>
+  <!-- facebook / LinkedIn / Twitter / WhatsApp-->
+  <q-btn color="black">
+    <ShareNetwork
+      network="WhatsApp"
+      url="https://lindaojo.com/blog/awesome-article"
+      title="Awesome Article"
+      description="This is an awesome article for awesome readers"
+      hashtags="Frontend, Programming"
+    >
+      <span>WhatsApp</span>
+    </ShareNetwork>
+
+    <!--    <ShareNetwork-->
+    <!--        network="facebook"-->
+    <!--        url="https://lindaojo.com/blog/awesome-article"-->
+    <!--        title="Awesome Article"-->
+    <!--        description="This is an awesome article for awesome readers"-->
+    <!--        hashtags="Frontend, Programming"-->
+    <!--    >-->
+    <!--      <q-btn color="black" label="facebook" no-caps />-->
+    <!--    </ShareNetwork>-->
+  </q-btn>
 </template>
 
 <script setup></script>
