@@ -5349,6 +5349,11 @@ vue-style-loader@4.1.3:
     hash-sum "^1.0.2"
     loader-utils "^1.0.2"
 
+vue3-carousel@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/vue3-carousel/-/vue3-carousel-0.2.0.tgz#3277d578b7505666004efdf865f96e2d68d31d22"
+  integrity sha512-nHfWRdDHzuwO42vq1ks3H6Vw/3IAIh8o3nscjWVZC2++16nN03yGIOVhGH7IXeOEYouo7xs2K82j8HYkSRuYyA==
+
 vue@^3.0.0:
   version "3.2.37"
   resolved "https://registry.yarnpkg.com/vue/-/vue-3.2.37.tgz#da220ccb618d78579d25b06c7c21498ca4e5452e"
@@ -5359,6 +5364,11 @@ vue@^3.0.0:
     "@vue/runtime-dom" "3.2.37"
     "@vue/server-renderer" "3.2.37"
     "@vue/shared" "3.2.37"
+
+vueperslides@^3.4.2:
+  version "3.4.2"
+  resolved "https://registry.yarnpkg.com/vueperslides/-/vueperslides-3.4.2.tgz#ea4b2df24f422dad185ab9f35a86bcaec1614564"
+  integrity sha512-q3QNFx47RoWaoAgCdeouD51WtSC1zgX4V9NFdNAMTuvqFDII6Arxr45w1NWCMKpoHjh5OZ32LefrYetu27GMEA==
 
 watchpack@^2.4.0:
   version "2.4.0"
