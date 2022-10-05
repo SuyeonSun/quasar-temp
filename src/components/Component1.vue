@@ -1,12 +1,47 @@
+<!-- VueLineChart.vue -->
 <template>
-  <Form v-slot="{ values }">
-    <Field name="selectBox1" v-slot="{ value, field }">
-      <q-select outlined model-value="value" v-bind="field" label="Outlined" />
-    </Field>
-    <Field name="selectBox2" v-slot="{ value, field }"> </Field>
-  </Form>
+  <svg ref="lines"></svg>
 </template>
 
-<script setup></script>
+<script>
+import * as d3 from "d3";
 
-<style scoped></style>
+export default {
+  data() {
+    return {
+      data: [90, 72, 75, 25, 10, 92],
+    };
+  },
+  mounted() {
+    const svg = d3
+      .select(this.$refs.lines)
+      .attr("width", 500)
+      .attr("height", 300);
+
+    svg
+      .append("path")
+      .datum(this.data)
+      .attr("fill", "none")
+      .attr("stroke", "#76BF8A")
+      .attr("stroke-width", 3)
+      .attr("d", this.line);
+  },
+  computed: {
+    line() {
+      return d3
+        .line()
+        .x((d, i) => this.xScale(i))
+        .y((d) => this.yScale(d));
+    },
+    xScale() {
+      return d3
+        .scaleLinear()
+        .range([20, 480])
+        .domain(d3.extent(this.data, (d, i) => i));
+    },
+    yScale() {
+      return d3.scaleLinear().range([280, 20]).domain([0, 100]);
+    },
+  },
+};
+</script>
