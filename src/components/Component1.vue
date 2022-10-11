@@ -61,9 +61,16 @@ onMounted(async () => {
       .duration(200)
       .style("opacity", 1)
       .style("stroke", "white");
+    tooltip
+      .style("left", event.pageX + 15 + "px")
+      .style("top", event.pageY - 28 + "px")
+      .transition()
+      .duration(400)
+      .style("opacity", 1)
+      .text(":");
   };
 
-  const mouseLeave = function (d) {
+  const mouseLeave = function () {
     d3.selectAll(".Country")
       .transition()
       .duration(200)
@@ -90,7 +97,7 @@ onMounted(async () => {
       }
       return colorScale(d.total);
     })
-    // add a class, styling and mouseove/mouseleave and click functions
+    // add a class, styling and mouseover/mouseleave and click functions
     .style("stroke", "transparent")
     .attr("class", function (d) {
       return "Country";
@@ -104,7 +111,7 @@ onMounted(async () => {
 });
 </script>
 
-<style scoped>
+<style>
 .map {
   padding: 20px;
   background-color: #ffffff;
