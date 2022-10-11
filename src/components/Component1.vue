@@ -54,6 +54,23 @@ onMounted(async () => {
     .attr("class", "tooltip")
     .style("opacity", 0);
 
+  // mouseOver
+  const mouseOver = function (d) {
+    d3.select(this)
+      .transition()
+      .duration(200)
+      .style("opacity", 1)
+      .style("stroke", "white");
+  };
+
+  const mouseLeave = function (d) {
+    d3.selectAll(".Country")
+      .transition()
+      .duration(200)
+      .style("opacity", 1)
+      .style("stroke", "transparent");
+  };
+
   // Draw the map
   const world = svg.append("g").attr("class", "world");
   world
@@ -72,9 +89,18 @@ onMounted(async () => {
         }
       }
       return colorScale(d.total);
-    });
-
-  // legend
+    })
+    // add a class, styling and mouseove/mouseleave and click functions
+    .style("stroke", "transparent")
+    .attr("class", function (d) {
+      return "Country";
+    })
+    .attr("id", function (d) {
+      return d.id;
+    })
+    .style("opacity", 1)
+    .on("mouseover", mouseOver)
+    .on("mouseleave", mouseLeave);
 });
 </script>
 
