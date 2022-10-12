@@ -36,15 +36,16 @@ onMounted(async () => {
   // threshold scale : domain, range
   const colorScale = d3
     .scaleThreshold()
-    .domain([100000, 1000000, 10000000, 30000000, 100000000, 500000000]) // threshold scale 및 화면에 표시될 수치
+    .domain([100, 500, 1000, 5000, 10000, 50000, 100000])
     .range([
-      "#006647",
-      "#00996a",
-      "#00d392",
-      "#00e59d",
-      "#00ffae",
-      "#66ffcf",
+      "#ccffef",
       "#b3ffe7",
+      "#66ffcf",
+      "#00ffae",
+      "#00e59d",
+      "#00d392",
+      "#00996a",
+      "#006647",
     ]); // 원래 코드: d3.schemeOrRd[7]
 
   // add tooltip
@@ -127,6 +128,16 @@ onMounted(async () => {
     .on("mouseover", mouseOver)
     .on("mouseleave", mouseLeave)
     .on("click", click);
+
+  // Legend
+  const x = d3.scaleLinear().domain([2.6, 75.1]).range([600, 860]);
+  const legend = svg.append("g").attr("id", "legend");
+  const legend_entry = legend.selectAll("g.legend").data(
+    colorScale.range().map(function (d) {
+      d = colorScale.invertExtent(d);
+      console.log(d);
+    })
+  );
 });
 </script>
 

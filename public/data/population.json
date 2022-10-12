@@ -81,6 +81,7 @@
   {"name": "Luxembourg", "population": 0, "month": 3},
   {"name": "Latvia", "population":  10000000, "month": 3},
   {"name": "Uzbekistan", "population": 30000, "month": 3},
-  {"name": "USA", "population": 3000, "month":3}
+  {"name": "USA", "population": 3000, "month":3},
+  {"name":  "Zambia", "population":  30000, "month": 3}
 ]
 
