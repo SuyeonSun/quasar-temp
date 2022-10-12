@@ -55,8 +55,17 @@ onMounted(async () => {
     .style("opacity", 0);
 
   // mouseOver
+  const population = ref(undefined);
+  const month = ref(undefined);
   const mouseOver = function (d) {
     const region = d3.select(this)._groups[0][0].__data__.properties.name;
+    worldPopulation.value.map((x) => {
+      if (x.name === region) {
+        population.value = x.population;
+        month.value = x.month;
+      }
+    });
+
     d3.select(this)
       .transition()
       .duration(200)
@@ -68,7 +77,9 @@ onMounted(async () => {
       .transition()
       .duration(400)
       .style("opacity", 1)
-      .text(region);
+      .text(
+        "국가: " + region + +"인구: " + month.value + "월: " + population.value
+      );
   };
 
   const mouseLeave = function () {
@@ -96,15 +107,6 @@ onMounted(async () => {
     .attr("data-name", function (d) {
       return d.properties.name;
     })
-    // .attr("fill", function (d) {
-    //   for (let key in worldPopulation.value) {
-    //     if (key === d.properties.name) {
-    //       d.total = worldPopulation.value[key];
-    //     }
-    //   }
-    //   return colorScale(d.total);
-    // })
-    // TODO
     .attr("fill", function (d) {
       worldPopulation.value.map((x) => {
         if (x.name === d.properties.name) {
@@ -113,7 +115,6 @@ onMounted(async () => {
       });
       return colorScale(d.total);
     })
-    // TODO
     // add a class, styling and mouseover/mouseleave and click functions
     .style("stroke", "transparent")
     .attr("class", function (d) {
