@@ -28,9 +28,12 @@ onMounted(async () => {
   let centered; // TODO
 
   const projection = d3
+    //  geoOrthographic
+    // geoMercator
     .geoMercator()
     .scale(100) // 800 x 450 화면에 나타날 지도 크기 비율
-    .translate([width / 2, height / 2]); // move the center of the canvas
+    .translate([width / 2, height / 1.45]) // move the center of the canvas
+    .rotate([100, 0]);
 
   // Define color scale
   // threshold scale : domain, range
