@@ -31,7 +31,7 @@ onMounted(async () => {
     //  geoOrthographic
     // geoMercator
     .geoMercator()
-    .scale(100) // 800 x 450 화면에 나타날 지도 크기 비율
+    .scale(80) // 800 x 450 화면에 나타날 지도 크기 비율
     .translate([width / 2, height / 1.45]) // move the center of the canvas
     .rotate([100, 0]);
 
