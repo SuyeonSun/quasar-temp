@@ -8,7 +8,7 @@
 
 <script setup>
 import * as d3 from "d3";
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 import { useStore } from "stores/store";
 import { storeToRefs } from "pinia";
 
@@ -56,6 +56,7 @@ onMounted(async () => {
 
   // mouseOver
   const mouseOver = function (d) {
+    const region = d3.select(this)._groups[0][0].__data__.properties.name;
     d3.select(this)
       .transition()
       .duration(200)
@@ -67,7 +68,7 @@ onMounted(async () => {
       .transition()
       .duration(400)
       .style("opacity", 1)
-      .text(":");
+      .text(region);
   };
 
   const mouseLeave = function () {
@@ -76,6 +77,12 @@ onMounted(async () => {
       .duration(200)
       .style("opacity", 1)
       .style("stroke", "transparent");
+    tooltip.transition().duration(300).style("opacity", 0);
+  };
+
+  const click = function () {
+    const region = d3.select(this)._groups[0][0].__data__.properties.name;
+    console.log(">>>", region);
   };
 
   // Draw the map
@@ -89,14 +96,24 @@ onMounted(async () => {
     .attr("data-name", function (d) {
       return d.properties.name;
     })
+    // .attr("fill", function (d) {
+    //   for (let key in worldPopulation.value) {
+    //     if (key === d.properties.name) {
+    //       d.total = worldPopulation.value[key];
+    //     }
+    //   }
+    //   return colorScale(d.total);
+    // })
+    // TODO
     .attr("fill", function (d) {
-      for (let key in worldPopulation.value) {
-        if (key === d.properties.name) {
-          d.total = worldPopulation.value[key];
+      worldPopulation.value.map((x) => {
+        if (x.name === d.properties.name) {
+          d.total = x.population;
         }
-      }
+      });
       return colorScale(d.total);
     })
+    // TODO
     // add a class, styling and mouseover/mouseleave and click functions
     .style("stroke", "transparent")
     .attr("class", function (d) {
@@ -107,7 +124,8 @@ onMounted(async () => {
     })
     .style("opacity", 1)
     .on("mouseover", mouseOver)
-    .on("mouseleave", mouseLeave);
+    .on("mouseleave", mouseLeave)
+    .on("click", click);
 });
 </script>
 
