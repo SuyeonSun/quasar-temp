@@ -29,8 +29,8 @@ onMounted(async () => {
 
   const projection = d3
     .geoMercator()
-    .scale(130) // 800 x 450 화면에 나타날 지도 크기 비율
-    .translate([width / 2, height / 2]); // 지도 위치
+    .scale(100) // 800 x 450 화면에 나타날 지도 크기 비율
+    .translate([width / 2, height / 2]); // move the center of the canvas
 
   // Define color scale
   // threshold scale : domain, range
@@ -79,7 +79,7 @@ onMounted(async () => {
       .duration(400)
       .style("opacity", 1)
       .text(
-        "국가: " + region + +"인구: " + month.value + "월: " + population.value
+        "국가: " + region + "인구: " + population.value + "월: " + month.value
       );
   };
 
@@ -130,14 +130,53 @@ onMounted(async () => {
     .on("click", click);
 
   // Legend
-  const x = d3.scaleLinear().domain([2.6, 75.1]).range([600, 860]);
-  const legend = svg.append("g").attr("id", "legend");
-  const legend_entry = legend.selectAll("g.legend").data(
-    colorScale.range().map(function (d) {
-      d = colorScale.invertExtent(d);
-      console.log(d);
-    })
-  );
+  // const x = d3.scaleLinear().domain([2.6, 75.1]).range([600, 860]);
+  // const legend = svg.append("g").attr("id", "legend");
+  // const legend_entry = legend
+  //   .selectAll("g.legend")
+  //   .data(
+  //     colorScale.range().map(function (d) {
+  //       d = colorScale.invertExtent(d);
+  //       if (d[0] === null) d[0] = x.domain()[0];
+  //       if (d[1] === null) d[1] = x.domain()[1];
+  //       return d;
+  //     })
+  //   )
+  //   .enter()
+  //   .append("g")
+  //   .attr("class", "legend_entry");
+  //
+  // const ls_w = 20;
+  // const ls_h = 20;
+  //
+  // legend_entry
+  //   .append("rect")
+  //   .attr("x", 20)
+  //   .attr("y", function (d, i) {
+  //     return height - i * ls_h - 2 * ls_h;
+  //   })
+  //   .attr("width", ls_w)
+  //   .attr("height", ls_h)
+  //   .style("fill", function (d) {
+  //     return colorScale(d[0]);
+  //   })
+  //   .style("opacity", 0.8);
+  //
+  // legend_entry
+  //   .append("text")
+  //   .attr("x", 50)
+  //   .attr("y", function (d, i) {
+  //     return height - i * ls_h - ls_h - 6;
+  //   })
+  //   .text(function (d, i) {
+  //     return d[0] + " m - " + d[1] + " m";
+  //   });
+  //
+  // legend
+  //   .append("text")
+  //   .attr("x", 15)
+  //   .attr("y", 250)
+  //   .text("Population (Million)");
 });
 </script>
 
