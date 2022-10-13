@@ -14,22 +14,32 @@ import { storeToRefs } from "pinia";
 
 const store = useStore();
 const { worldPopulation } = storeToRefs(store);
+const svg = ref(undefined);
+const width = ref(undefined);
+const height = ref(undefined);
+const worldMap = ref(undefined);
 
 onMounted(async () => {
   // STEP1: 초기 세팅
-  const svg = d3.select("svg");
-  const width = svg.attr("width"); // 800
-  const height = svg.attr("height"); // 450
+  svg.value = d3.select("svg");
+  width.value = svg.value.attr("width"); // 800
+  height.value = svg.value.attr("height"); // 450
   const path = d3.geoPath();
 
   // STEP2: 데이터 가져오기
-  const worldMap = await require("./world.json"); // 데이터 고정
+  worldMap.value = await require("./world.json"); // 데이터 고정
   await store.getWorldPopulation(); // TODO: sales 데이터 가져오기로 변경 필요
 
+  // STEP3: 지도 그리기
+  await drawMap();
+});
+
+// drawMap()
+const drawMap = () => {
   const projection = d3
     .geoMercator()
     .scale(80) // 지도 크기 비율
-    .translate([width / 2, height / 1.45]) // move the center of the canvas
+    .translate([width.value / 2, height.value / 1.45]) // move the center of the canvas
     .rotate([100, 0]); // 미국 중심 지도로 변환
 
   // Define color scale
@@ -94,14 +104,14 @@ onMounted(async () => {
 
   const click = function () {
     const region = d3.select(this)._groups[0][0].__data__.properties.name;
-    console.log(">>>", region);
+    console.log(">>>", region); // TODO: 선택한 region 데이터를 서버로 보내 '세계 평균 vs 선택한 국가 비교 그래프' 데이터 호출
   };
 
   // Draw the map
-  const world = svg.append("g").attr("class", "world");
+  const world = svg.value.append("g").attr("class", "world");
   world
     .selectAll("path")
-    .data(worldMap.features)
+    .data(worldMap.value.features)
     .enter()
     .append("path")
     .attr("d", d3.geoPath().projection(projection))
@@ -180,7 +190,7 @@ onMounted(async () => {
   //   .attr("x", 15)
   //   .attr("y", 250)
   //   .text("Population (Million)");
-});
+};
 </script>
 
 <style>
