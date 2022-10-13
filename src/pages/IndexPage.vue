@@ -4,6 +4,7 @@ import { useMainPageStore } from "stores/main-page-store";
 import { onMounted } from "vue";
 import { storeToRefs } from "pinia/dist/pinia";
 import RangeAfterFullChargingChart from "components/RangeAfterFullChargingChart";
+import RadarChart from "components/RadarChart";
 
 const store = useMainPageStore();
 const { eviqPickChartInfoList } = storeToRefs(store);
@@ -23,6 +24,11 @@ onMounted(() => {
     <div class="bg-yellow-1 q-mt-lg">
       <div class="text-bold">Range After Full Charging Chart</div>
       <range-after-full-charging-chart></range-after-full-charging-chart>
+    </div>
+
+    <div class="q-mt-lg" style="border: 1px solid black">
+      <div class="text-bold">Radar Chart</div>
+      <radar-chart></radar-chart>
     </div>
   </q-page>
 </template>
