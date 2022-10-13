@@ -30,20 +30,16 @@ ChartJS.register(
   LinearScale
 );
 
-// const props = defineProps({
-//   score: Number,
-// });
-
-// onMounted(() => {
-//   chartData.value.datasets[0].data[0] = props.score;
-//   chartData.value.datasets[1].data[0] = 100 - props.score;
-// });
+onMounted(() => {
+  chartData.value.datasets[0].data[0] = 10;
+  chartData.value.datasets[0].data[1] = 20;
+});
 
 const chartData = ref({
   labels: ["Average", "Selected Car"],
   datasets: [
     {
-      data: [50, 50],
+      data: [],
       backgroundColor: ["#dbdbdb", "#00d392"],
     },
   ],
@@ -70,6 +66,9 @@ const chartOptions = {
   plugins: {
     legend: {
       display: false,
+    },
+    tooltip: {
+      enabled: false,
     },
   },
 };
