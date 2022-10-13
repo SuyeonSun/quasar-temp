@@ -31,20 +31,28 @@ ChartJS.register(
 );
 const labels = "";
 const chartData = {
-  labels: [labels], // TODO: labels 제거
-  datasets: [{ data: [100], backgroundColor: "#00d392" }],
+  labels: [labels],
+  datasets: [
+    { data: [80], backgroundColor: "#00d392" },
+    { data: [20], backgroundColor: "#dbdbdb" }, // 100 - data
+  ],
 };
 
 const chartOptions = {
   indexAxis: "y",
   responsive: true,
+  maxBarThickness: 20,
   scales: {
     x: {
+      stacked: true,
+      display: false,
       grid: {
         display: false,
       },
     },
     y: {
+      stacked: true,
+      display: false,
       grid: {
         display: false,
       },
