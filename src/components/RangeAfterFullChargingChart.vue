@@ -4,9 +4,8 @@
     :chart-data="chartData"
     chart-id="bar-chart"
     dataset-id-key="label"
-    :height="20"
+    :height="50"
   />
-  {{ props.score }}
 </template>
 
 <script setup>
@@ -31,21 +30,22 @@ ChartJS.register(
   LinearScale
 );
 
-const props = defineProps({
-  score: Number,
-});
+// const props = defineProps({
+//   score: Number,
+// });
 
-onMounted(() => {
-  chartData.value.datasets[0].data[0] = props.score;
-  chartData.value.datasets[1].data[0] = 100 - props.score;
-});
+// onMounted(() => {
+//   chartData.value.datasets[0].data[0] = props.score;
+//   chartData.value.datasets[1].data[0] = 100 - props.score;
+// });
 
-const labels = "";
 const chartData = ref({
-  labels: [labels],
+  labels: ["Average", "Selected Car"],
   datasets: [
-    { data: [], backgroundColor: "#00d392" },
-    { data: [], backgroundColor: "#dbdbdb" },
+    {
+      data: [50, 50],
+      backgroundColor: ["#dbdbdb", "#00d392"],
+    },
   ],
 });
 
@@ -55,15 +55,13 @@ const chartOptions = {
   maxBarThickness: 20,
   scales: {
     x: {
-      stacked: true,
       display: false,
       grid: {
         display: false,
       },
     },
     y: {
-      stacked: true,
-      display: false,
+      // display: false,
       grid: {
         display: false,
       },
@@ -72,9 +70,6 @@ const chartOptions = {
   plugins: {
     legend: {
       display: false,
-    },
-    tooltip: {
-      enabled: false,
     },
   },
 };

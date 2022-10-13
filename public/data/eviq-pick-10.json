@@ -1,0 +1,18 @@
+[
+  {
+    "ranking": 1,
+    "status": "up",
+    "image": "image url",
+    "oem": "KIA",
+    "model": "ionic 5",
+    "score": 90
+  },
+  {
+    "ranking": 1,
+    "status": "up",
+    "image": "image url",
+    "oem": "KIA",
+    "model": "ionic 5",
+    "score": 80
+  }
+]
