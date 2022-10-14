@@ -7,6 +7,7 @@ import RangeAfterFullChargingChart from "components/RangeAfterFullChargingChart"
 import RadarChart from "components/RadarChart";
 import ChargingTimeGraph from "components/ChargingTimeGraph";
 import ComparisonOfSales from "components/ComparisonOfSales";
+import SalesByCountryGraph from "components/SalesByCountryGraph";
 
 const store = useMainPageStore();
 const { eviqPickChartInfoList } = storeToRefs(store);
@@ -41,6 +42,11 @@ onMounted(() => {
     <div class="q-mt-lg" style="border: 1px solid black">
       <div class="text-bold">Comparison of Sales</div>
       <comparison-of-sales></comparison-of-sales>
+    </div>
+
+    <div class="q-mt-lg" style="border: 1px solid black">
+      <div class="text-bold">Sales By Country Graph</div>
+      <sales-by-country-graph></sales-by-country-graph>
     </div>
   </q-page>
 </template>
