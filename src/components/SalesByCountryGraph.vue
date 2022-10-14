@@ -42,6 +42,14 @@ const chartData = ref({
 const chartOptions = {
   responsive: true,
   maintainAspectRatio: false,
+  plugins: {
+    legend: {
+      position: "bottom",
+    },
+    tooltip: {
+      enabled: false,
+    },
+  },
 };
 
 const calculateBackgroundColor = (Info) => {
