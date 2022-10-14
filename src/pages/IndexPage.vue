@@ -6,6 +6,7 @@ import { storeToRefs } from "pinia/dist/pinia";
 import RangeAfterFullChargingChart from "components/RangeAfterFullChargingChart";
 import RadarChart from "components/RadarChart";
 import ChargingTimeGraph from "components/ChargingTimeGraph";
+import ComparisonOfSales from "components/ComparisonOfSales";
 
 const store = useMainPageStore();
 const { eviqPickChartInfoList } = storeToRefs(store);
@@ -22,7 +23,7 @@ onMounted(() => {
       <eviq-pick10-box :info="info"></eviq-pick10-box>
     </div>
 
-    <div class="bg-yellow-1 q-mt-lg">
+    <div class="q-mt-lg" style="border: 1px solid black">
       <div class="text-bold">Range After Full Charging Chart</div>
       <range-after-full-charging-chart></range-after-full-charging-chart>
     </div>
@@ -32,9 +33,14 @@ onMounted(() => {
       <radar-chart></radar-chart>
     </div>
 
-    <div class="bg-red-1 q-mt-lg">
+    <div class="q-mt-lg" style="border: 1px solid black">
       <div class="text-bold">ChargingTimeGraph</div>
       <charging-time-graph></charging-time-graph>
+    </div>
+
+    <div class="q-mt-lg" style="border: 1px solid black">
+      <div class="text-bold">Comparison of Sales</div>
+      <comparison-of-sales></comparison-of-sales>
     </div>
   </q-page>
 </template>
