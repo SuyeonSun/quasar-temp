@@ -2,13 +2,13 @@
 import EviqPick10Box from "components/EviqPick10Box";
 import { useMainPageStore } from "stores/main-page-store";
 import { onMounted } from "vue";
-import { storeToRefs } from "pinia/dist/pinia";
-import RangeAfterFullChargingChart from "components/RangeAfterFullChargingChart";
+import { storeToRefs } from "pinia";
 import RadarChart from "components/RadarChart";
 import ChargingTimeGraph from "components/ChargingTimeGraph";
 import ComparisonOfSales from "components/ComparisonOfSales";
 import SalesByCountryGraph from "components/SalesByCountryGraph";
 import SafetyIndexDetailsGraphBox from "components/SafetyIndexDetailsGraphBox";
+import RangeAfterFullChargingChartBox from "components/RangeAfterFullChargingChartBox";
 
 const store = useMainPageStore();
 const { eviqPickChartInfoList } = storeToRefs(store);
@@ -20,14 +20,16 @@ onMounted(() => {
 
 <template>
   <q-page class="q-pa-xl">
-    <div class="text-bold">EVIQ's Pick 10</div>
-    <div v-for="info in eviqPickChartInfoList" class="bg-blue-1">
-      <eviq-pick10-box :info="info"></eviq-pick10-box>
+    <div style="border: 1px solid black">
+      <div class="text-bold">EVIQ's Pick 10</div>
+      <div v-for="info in eviqPickChartInfoList">
+        <eviq-pick10-box :info="info"></eviq-pick10-box>
+      </div>
     </div>
 
     <div class="q-mt-lg" style="border: 1px solid black">
       <div class="text-bold">Range After Full Charging Chart</div>
-      <range-after-full-charging-chart></range-after-full-charging-chart>
+      <range-after-full-charging-chart-box></range-after-full-charging-chart-box>
     </div>
 
     <div class="q-mt-lg" style="border: 1px solid black">
