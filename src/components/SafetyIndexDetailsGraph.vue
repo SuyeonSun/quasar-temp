@@ -10,8 +10,9 @@
 <script setup>
 import { Doughnut } from "vue-chartjs";
 import { Chart, registerables } from "chart.js";
+// import chartjsPluginDoughnutlabel from "chartjs-plugin-doughnutlabel";
 import { onMounted, ref } from "vue";
-Chart.register(...registerables);
+Chart.register(...registerables); // chartjsPluginDoughnutlabel
 
 const props = defineProps({
   title: String,
@@ -24,7 +25,6 @@ onMounted(() => {
   chartData.value.datasets[0].data[1] = 100 - props.value;
   chartData.value.datasets[0].backgroundColor = [props.color, "#dbdbdb"];
   chartData.value.datasets[0].borderColor = [props.color, "#dbdbdb"];
-  chartOptions.value.plugins.title.text = props.title;
 });
 
 const chartData = ref({
@@ -41,31 +41,5 @@ const chartOptions = ref({
   responsive: true,
   maintainAspectRatio: false,
   cutoutPercentage: 10,
-  plugins: {
-    doughnutlabel: {
-      labels: [
-        {
-          text: 0,
-          font: {
-            size: "30",
-            weight: "bold",
-          },
-        },
-      ],
-    },
-    title: {
-      display: true,
-      position: "bottom",
-      align: "center",
-      text: "",
-      font: { size: "14px" },
-    },
-    legend: {
-      display: false,
-    },
-    tooltip: {
-      enabled: false,
-    },
-  },
 });
 </script>
