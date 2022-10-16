@@ -8,6 +8,7 @@ import RadarChart from "components/RadarChart";
 import ChargingTimeGraph from "components/ChargingTimeGraph";
 import ComparisonOfSales from "components/ComparisonOfSales";
 import SalesByCountryGraph from "components/SalesByCountryGraph";
+import SafetyIndexDetailsGraphBox from "components/SafetyIndexDetailsGraphBox";
 
 const store = useMainPageStore();
 const { eviqPickChartInfoList } = storeToRefs(store);
@@ -47,6 +48,11 @@ onMounted(() => {
     <div class="q-mt-lg" style="border: 1px solid black">
       <div class="text-bold">Sales By Country Graph</div>
       <sales-by-country-graph></sales-by-country-graph>
+    </div>
+
+    <div class="q-mt-lg" style="border: 1px solid black">
+      <div class="text-bold">Safety Index Details Graph</div>
+      <safety-index-details-graph-box></safety-index-details-graph-box>
     </div>
   </q-page>
 </template>
