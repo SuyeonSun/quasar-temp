@@ -64,7 +64,7 @@ onMounted(() => {
       <safety-index-score-box></safety-index-score-box>
     </div>
 
-    <div class="q-mt-lg" style="border: 1px solid red">
+    <div class="q-mt-lg">
       <div class="text-bold">Ring Chart With Text Center Graph</div>
       <ring-chart-with-text-center-box></ring-chart-with-text-center-box>
     </div>
