@@ -10,6 +10,7 @@ import SalesByCountryGraph from "components/SalesByCountryGraph";
 import SafetyIndexDetailsGraphBox from "components/SafetyIndexDetailsGraphBox";
 import RangeAfterFullChargingChartBox from "components/RangeAfterFullChargingChartBox";
 import SafetyIndexScoreBox from "components/SafetyIndexScoreBox";
+import RingChartWithTextCenterBox from "components/ring-chart-with-text-center-box";
 
 const store = useMainPageStore();
 const { eviqPickChartInfoList } = storeToRefs(store);
@@ -61,6 +62,11 @@ onMounted(() => {
     <div class="q-mt-lg" style="border: 1px solid black">
       <div class="text-bold">Safety Index Score Graph</div>
       <safety-index-score-box></safety-index-score-box>
+    </div>
+
+    <div class="q-mt-lg" style="border: 1px solid red">
+      <div class="text-bold">Ring Chart With Text Center Graph</div>
+      <ring-chart-with-text-center-box></ring-chart-with-text-center-box>
     </div>
   </q-page>
 </template>
