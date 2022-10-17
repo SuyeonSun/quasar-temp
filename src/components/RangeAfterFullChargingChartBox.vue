@@ -1,11 +1,11 @@
 <template>
   <range-after-full-charging-chart
     label="Average"
-    :chargingValue="rangeAfterFullChargingGraphInfo.average"
+    :value="rangeAfterFullChargingGraphInfo.average"
   ></range-after-full-charging-chart>
   <range-after-full-charging-chart
     label="Selected Car"
-    :chargingValue="rangeAfterFullChargingGraphInfo.selectedCar"
+    :value="rangeAfterFullChargingGraphInfo.selectedCar"
   ></range-after-full-charging-chart>
 </template>
 

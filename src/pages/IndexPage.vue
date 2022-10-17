@@ -9,6 +9,7 @@ import ComparisonOfSales from "components/ComparisonOfSales";
 import SalesByCountryGraph from "components/SalesByCountryGraph";
 import SafetyIndexDetailsGraphBox from "components/SafetyIndexDetailsGraphBox";
 import RangeAfterFullChargingChartBox from "components/RangeAfterFullChargingChartBox";
+import SafetyIndexScoreBox from "components/SafetyIndexScoreBox";
 
 const store = useMainPageStore();
 const { eviqPickChartInfoList } = storeToRefs(store);
@@ -55,6 +56,11 @@ onMounted(() => {
     <div class="q-mt-lg" style="border: 1px solid black">
       <div class="text-bold">Safety Index Details Graph</div>
       <safety-index-details-graph-box></safety-index-details-graph-box>
+    </div>
+
+    <div class="q-mt-lg" style="border: 1px solid black">
+      <div class="text-bold">Safety Index Score Graph</div>
+      <safety-index-score-box></safety-index-score-box>
     </div>
   </q-page>
 </template>

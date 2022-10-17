@@ -33,14 +33,14 @@ ChartJS.register(
 
 const props = defineProps({
   label: String,
-  chargingValue: Number,
+  value: Number,
 });
 
 watch(
-  () => props.chargingValue,
+  () => props.value,
   (value) => {
-    chartData.value.datasets[0].data[0] = props.chargingValue;
-    chartData.value.datasets[1].data[0] = 100 - props.chargingValue;
+    chartData.value.datasets[0].data[0] = props.value;
+    chartData.value.datasets[1].data[0] = 100 - props.value;
   }
 );
 

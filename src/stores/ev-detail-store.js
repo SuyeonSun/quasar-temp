@@ -8,6 +8,9 @@ export const useEvDetailStore = defineStore("evDetailStore", {
 
     // 2
     rangeAfterFullChargingGraphInfo: {},
+
+    // 3
+    safetyIndexScoreGraphInfo: {},
   }),
   actions: {
     // 1
@@ -22,6 +25,12 @@ export const useEvDetailStore = defineStore("evDetailStore", {
         "/data/range-after-full-charging-graph-info.json"
       );
       this.rangeAfterFullChargingGraphInfo = response.data;
+    },
+
+    // 3
+    async getSafetyIndexScoreGraphInfo() {
+      const response = await axios.get("/data/safety-index-score-info.json");
+      this.safetyIndexScoreGraphInfo = response.data;
     },
   },
 });

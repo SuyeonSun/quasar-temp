@@ -2067,6 +2067,11 @@ chartjs-plugin-datalabels@^2.1.0:
   resolved "https://registry.yarnpkg.com/chartjs-plugin-datalabels/-/chartjs-plugin-datalabels-2.1.0.tgz#d42f05a0481831b2d79fb8c0521f8fa56e1e6db1"
   integrity sha512-WA6R4saSlY6mnyX78SkbSo2gGc+cj87lFi5zBrsjjYxE76JgXyxHa1OTodVCzRPoqeYJqSEOffeJ/897kRHR6w==
 
+chartjs-plugin-doughnutlabel-rebourne@^3.0.0-beta.4:
+  version "3.0.0-beta.4"
+  resolved "https://registry.yarnpkg.com/chartjs-plugin-doughnutlabel-rebourne/-/chartjs-plugin-doughnutlabel-rebourne-3.0.0-beta.4.tgz#69355ae90bcea85ecb395ef25bcd6c07726459f5"
+  integrity sha512-qp5MTBSfuVC/HdRHMvbDRPaG7kDBEtyrn8fPOfs8jiajp+U68OvYp8SLqjjr+64inswIz6e/hlOGTB4oR1gOQQ==
+
 chartjs-plugin-doughnutlabel@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/chartjs-plugin-doughnutlabel/-/chartjs-plugin-doughnutlabel-2.0.3.tgz#0aa19b040dc68e12163e3215a01609cb3e0b5a7b"
@@ -2076,6 +2081,11 @@ chartjs-plugin-labels@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/chartjs-plugin-labels/-/chartjs-plugin-labels-1.1.0.tgz#3a040fa78994e8c482ca4d47426d1e894fe679f5"
   integrity sha512-ab1oiQT7oMnpYDn6h8biL7VZM0qIxtwfhQw1+qH7xe7Ia6lBKX/ks5rEhgI6CZ4PlRRgDFGK9Mf/T2SO9l+NCA==
+
+chartjs-plugin-outerlabels@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/chartjs-plugin-outerlabels/-/chartjs-plugin-outerlabels-2.0.0.tgz#624ea0acd1d982479859fe72cab9998db291a7ff"
+  integrity sha512-1a2eRRVAB5ccurpkEe8Cgztovpfmb29cxIUUVCJzJBBPrFYSnWU2YoygEclgjbQ+2pykwm93GFKs1tflKwjQ6g==
 
 chokidar@3.5.3, "chokidar@>=3.0.0 <4.0.0", chokidar@^3.4.2, chokidar@^3.5.3:
   version "3.5.3"
