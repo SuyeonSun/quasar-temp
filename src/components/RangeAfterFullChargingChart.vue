@@ -18,8 +18,9 @@ import {
   CategoryScale,
   LinearScale,
 } from "chart.js";
-import { ref, watch } from "vue";
+import { onMounted, ref, watch } from "vue";
 import ChartDataLabels from "chartjs-plugin-datalabels";
+import { useRouter } from "vue-router";
 ChartJS.register(
   Title,
   Tooltip,
@@ -95,8 +96,12 @@ const chartOptions = {
     datalabels: {
       formatter: function (value, context) {
         return props.value + " km";
-        // return context.chart.data.labels[context.dataIndex];
-        // console.log(context.chart.data);
+
+        // TODO: router에 따라 return 값 변경
+        // const $router = useRouter();
+        // $router.currentRoute.value
+        // if currentRoute가 main이면 return average + props.value + km
+        // if currentRoute가 detail이면 return props.value + km
       },
       anchor: "end",
       align: "start",
