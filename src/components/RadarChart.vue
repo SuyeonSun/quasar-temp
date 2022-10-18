@@ -17,9 +17,20 @@ const { evAverageComparisonGraphInfo } = storeToRefs(store);
 onMounted(async () => {
   await store.getEvAverageComparisonGraphInfo();
 
-  chartData.value.datasets[0].data = evAverageComparisonGraphInfo.value.average;
-  chartData.value.datasets[1].data =
-    evAverageComparisonGraphInfo.value.selectedVehicle;
+  chartData.value.datasets[0].data = [
+    evAverageComparisonGraphInfo.value.average.price,
+    evAverageComparisonGraphInfo.value.average.sales,
+    evAverageComparisonGraphInfo.value.average.safety,
+    evAverageComparisonGraphInfo.value.average.chargingTime,
+    evAverageComparisonGraphInfo.value.average.range,
+  ];
+  chartData.value.datasets[1].data = [
+    evAverageComparisonGraphInfo.value.selectedVehicle.price,
+    evAverageComparisonGraphInfo.value.selectedVehicle.sales,
+    evAverageComparisonGraphInfo.value.selectedVehicle.safety,
+    evAverageComparisonGraphInfo.value.selectedVehicle.chargingTime,
+    evAverageComparisonGraphInfo.value.selectedVehicle.range,
+  ];
 });
 
 const chartData = ref({

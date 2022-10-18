@@ -19,6 +19,7 @@
     "chartjs-plugin-labels": "^1.1.0",
     "chartjs-plugin-outerlabels": "^2.0.0",
     "core-js": "^3.6.5",
+    "d3": "^7.6.1",
     "pinia": "^2.0.11",
     "quasar": "^2.6.0",
     "vee-validate": "^4.6.6",
