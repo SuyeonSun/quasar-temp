@@ -2,10 +2,8 @@
   <Bar
     :chart-options="chartOptions"
     :chart-data="chartData"
-    chart-id="bar-chart"
-    dataset-id-key="label"
-    :height="20"
     :plugins="[ChartDataLabels]"
+    :height="30"
   />
 </template>
 
@@ -39,8 +37,11 @@ const props = defineProps({
 watch(
   () => props.value,
   (value) => {
-    chartData.value.datasets[0].data[0] = props.value;
-    chartData.value.datasets[1].data[0] = 100 - props.value;
+    // 1500을 100%로 취급하여 %로 계산
+    // 1500, 1300, 1100과 같은 홀수는 vue-chartjs에서 정확한 비율을 계산하지 못함
+    chartData.value.datasets[0].data[0] = (value * 100) / 1500;
+    chartData.value.datasets[1].data[0] =
+      100 - chartData.value.datasets[0].data[0];
   }
 );
 
@@ -65,6 +66,7 @@ const chartData = ref({
 const chartOptions = {
   indexAxis: "y",
   responsive: true,
+  // maintainAspectRatio: true,
   maxBarThickness: 20,
   scales: {
     x: {
@@ -92,7 +94,9 @@ const chartOptions = {
     // datalabels
     datalabels: {
       formatter: function (value, context) {
-        return value + " km";
+        return props.value + " km";
+        // return context.chart.data.labels[context.dataIndex];
+        // console.log(context.chart.data);
       },
       anchor: "end",
       align: "start",
@@ -108,3 +112,5 @@ const chartOptions = {
   },
 };
 </script>
+
+<style scoped></style>

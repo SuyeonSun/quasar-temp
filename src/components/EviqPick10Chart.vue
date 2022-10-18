@@ -52,6 +52,7 @@ const chartData = ref({
 const chartOptions = {
   indexAxis: "y",
   responsive: true,
+  // maintainAspectRatio: true,
   maxBarThickness: 20,
   scales: {
     x: {
