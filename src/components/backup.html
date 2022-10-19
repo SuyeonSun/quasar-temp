@@ -20,6 +20,7 @@
         height = 540,
         radius = 200;
 
+    // TODO
     var arc = d3.arc()
         .outerRadius(radius - 50)
         .innerRadius(100);
@@ -42,6 +43,7 @@
         .data(pie(data))
         .enter().append("g");
 
+    // TODO
     g.append("path")
         .attr("d", arc)
         .style("fill", function(d,i) {
