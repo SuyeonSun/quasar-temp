@@ -1,4 +1,3 @@
-// Based on reusable chart pattern from https://bost.ocks.org/mike/chart/
 function gaugeChart() {
   var margin = { top: 0, right: 65, bottom: 10, left: 65 },
     width = 250,
@@ -7,28 +6,25 @@ function gaugeChart() {
     arcMax = Math.PI / 2,
     innerRadius = 60,
     outerRadius = 80,
-    dataDomain = [0, 30, 60], // 차트 그래프 표현 비율
-    labelPad = 30, // label이 그래프에서 떨어지는 정도
+    dataDomain = [0, 50, 100],
+    labelPad = 10,
     dataValue = function (d) {
       return +d;
     },
     colorScale = d3.scaleLinear(),
     arcScale = d3.scaleLinear(),
-    // colorOptions = ["#00d392", "#00d392", "#00d392"],
+    colorOptions = ["#d7191c", "#efef5d", "#1a9641"],
     arc = d3.arc();
-  // Arc generator: arc generator produce path data from angle and radius values
-  // startAngle, endAngle, innerRadius, outerRadius
 
   function chart(selection) {
     selection.each(function (data) {
-      // ===== data = evChargingValue =====
       // Convert data to standard representation greedily;
       // this is needed for nondeterministic accessors.
       data = data.map(function (d, i) {
         return dataValue(d);
       });
       arcScale = d3.scaleLinear().domain(dataDomain).range([arcMin, 0, arcMax]);
-      // colorScale = d3.scaleLinear().domain(dataDomain).range(colorOptions);
+      colorScale = d3.scaleLinear().domain(dataDomain).range(colorOptions);
       arc = d3
         .arc()
         .innerRadius(innerRadius)
@@ -40,38 +36,41 @@ function gaugeChart() {
 
       // Otherwise, create the skeletal chart.
       var gEnter = svg.enter().append("svg").append("g");
-      var arcGEnter = gEnter.append("g").attr("class", "arc"); // arc class append
-      arcGEnter.append("path").attr("class", "bg-arc"); // bg-arc class append
+      console.log("##########", gEnter);
+      var arcGEnter = gEnter.append("g").attr("class", "arc");
+      console.log("########## arcGEnter", arcGEnter);
 
+      arcGEnter.append("path").attr("class", "bg-arc");
       arcGEnter
         .append("path")
-        .attr("class", "data-arc") // data-arc class append
-        .datum({ endAngle: arcMin, startAngle: arcMin, score: dataDomain[0] }) // score
+        .attr("class", "data-arc")
+        .datum({ endAngle: arcMin, startAngle: arcMin, score: dataDomain[0] })
         .attr("d", arc)
-        .style("fill", "#00d392")
-        // .style("fill", colorScale("#00d392"))
+        .style("fill", colorScale(dataDomain[0]))
         .each(function (d) {
           this._current = d;
         });
-      arcGEnter.append("text").attr("class", "arc-label"); // center text
+      arcGEnter.append("text").attr("class", "arc-label");
 
       arcGEnter
         .selectAll(".lines")
         .data(
-          arcScale.ticks(3).map(function (d) {
-            return { score: 30 }; // score에 따라 나뉘는 line 위치 결정됨 // TODO score 값 바꾸면 line 위치 바뀜
+          arcScale.ticks(5).map(function (d) {
+            return { score: d };
           })
         )
         .enter()
         .append("path")
-        .attr("class", "lines"); // lines style class 주지 않기
+        .attr("class", "lines");
 
+      // TODO: #####################
       arcGEnter
         .selectAll(".ticks")
-        .data(arcScale.ticks(5)) // arcScale.ticks(5)
+        .data(arcScale.ticks(5))
         .enter()
         .append("text")
-        .attr("class", "ticks"); // label class
+        .style("fill", "red")
+        .attr("class", "ticks");
 
       // Update the outer dimensions.
       var svg = selection.select("svg");
@@ -94,8 +93,8 @@ function gaugeChart() {
       svg
         .select("g.arc .bg-arc")
         .datum({ endAngle: arcMax })
-        .style("fill", "#dbdbdb")
-        .attr("d", arc); // defines the path
+        .style("fill", "#ddd")
+        .attr("d", arc);
 
       // https://bl.ocks.org/mbostock/1346410
       function arcTween(a) {
@@ -111,7 +110,7 @@ function gaugeChart() {
         .datum({
           score: data[0],
           startAngle: arcMin,
-          endAngle: arcScale(data[0]), // TODO: data가 끝나는 지점
+          endAngle: arcScale(data[0]),
         })
         .transition()
         .duration(750)
@@ -124,6 +123,7 @@ function gaugeChart() {
         .attrTween("d", arcTween);
 
       var arcBox = svg.select("g.arc .bg-arc").node().getBBox();
+      console.log(arcBox);
       svg
         .select("text.arc-label")
         .datum({ score: data[0] })
@@ -131,14 +131,12 @@ function gaugeChart() {
         .attr("y", -15)
         .style("alignment-baseline", "central")
         .style("text-anchor", "middle")
-        .style("font-size", "30px") // 가운데 텍스트 스타일
-        .style("font-weight", "bold")
+        .style("fill", "blue")
+        .style("font-size", "30px")
         .text(function (d) {
-          // return d3.format(".1f")(d.score);
-          return d.score + "MIN";
+          return d3.format(".1f")(d.score);
         });
 
-      // ############
       var markerLine = d3
         .radialLine()
         .angle(function (d) {
@@ -153,14 +151,12 @@ function gaugeChart() {
         .attr("d", function (d) {
           return markerLine([d.score, d.score]);
         })
-        .style("fill", "red")
+        .style("fill", "none")
         .style("stroke-width", 2.5)
-        .style("stroke", "red");
-      // ############
-
+        .style("stroke", "#fff");
       arcG
         .selectAll(".ticks")
-        .style("font-size", "15px")
+        .style("font-size", "12px")
         .style("text-anchor", "middle")
         .attr("x", function (d) {
           return Math.cos(arcScale(d) + arcMin) * (outerRadius + labelPad);
@@ -169,10 +165,8 @@ function gaugeChart() {
           var yVal = Math.sin(arcScale(d) + arcMin) * (outerRadius + labelPad);
           return yVal < -1 ? yVal : -7;
         })
-        .style("fill", "#8e8e8e")
         .text(function (d) {
-          return d === 60 ? d + "MIN" : "";
-          // return d;
+          return d;
         });
     });
   }

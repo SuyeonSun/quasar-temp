@@ -20,7 +20,6 @@
         height = 540,
         radius = 200;
 
-    // TODO
     var arc = d3.arc()
         .outerRadius(radius - 50)
         .innerRadius(100);
@@ -39,11 +38,14 @@
         .append("g")
         .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
+    // 서비스 기획 그룹 가시나요?
+    // 네!
+    // 넵! 안녕히 가세요~ 건승하세요~ 잘 하실 겁니다!
+
     var g = svg.selectAll(".arc")
         .data(pie(data))
         .enter().append("g");
 
-    // TODO
     g.append("path")
         .attr("d", arc)
         .style("fill", function(d,i) {
@@ -64,12 +66,12 @@
                 return '#8e8e8e'
             }
         })
-        .text(function(d) {
-            // if(d.data.percentage < 8) {
-            //     return '';
-            // }
-            return d.data.percentage;
-        })
+        // .text(function(d) {
+        //     // if(d.data.percentage < 8) {
+        //     //     return '';
+        //     // }
+        //     return d.data.percentage;
+        // })
 
     g.append("text")
         .attr("text-anchor", "middle")
@@ -81,5 +83,6 @@
                 return d.data.percentage
             }
         })
+
 </script>
 </body>
