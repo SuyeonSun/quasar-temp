@@ -23,18 +23,18 @@
 
     var labelr = radius + 30; // radius for label anchor
     // array of colors for the pie (in the same order as the dataset)
-    var color = ['red', 'orange', 'yellow']
+    var color = ['#00adff', '#dbdbdb', '#f4f4f4']
 
     const dataFromServer = [
-        { label: 'Ev', value: 30 },
-        { label: 'Average', value: 40 },
+        { label: 'Ev', value: 24 },
+        { label: 'Average', value: 47 },
         { label: 'Max', value: 60 },
     ]
 
     const data = [
-        { label: 'Ev', value: 30 }, // 40
-        { label: 'Average', value: 10 }, // 0
-        { label: 'Max', value: 20 }, // 20
+        { label: 'Ev', value: 24 }, // 40
+        { label: 'Average', value: 33 }, // 0
+        { label: 'Max', value: 13 }, // 20
     ];
 
     // https://mygumi.tistory.com/346
@@ -81,7 +81,7 @@
         .data(pie)  //associate the generated pie data (an array of arcs, each having startAngle, endAngle and value properties)
         .enter()   //this will create <g> elements for every "extra" data element that should be associated with a selection. The result is creating a <g> for every object in the data array
         .append("svg:g")  //create a group to hold each slice (we will have a <path> and a <text> element associated with each slice)
-        .attr("class", "slice");    //allow us to style things in the slices (like text)
+        .attr("class", "slice")    //allow us to style things in the slices (like text)
 
     // TODO: 전체 색상 채우기
     arcs.append("svg:path")
@@ -92,37 +92,47 @@
     arcs.append('svg:text')
         .attr("text-anchor", "middle")
         .attr('font-size', '2em')
-        .attr('y', -15)
+        .attr('fill', '#282828')
+        .attr('x', -20)
+        .attr('y', -10)
         .text(function (d) {
             if(d.data.label === 'Ev') {
-                return d.data.value + 'MIN'
+                return d.data.value
+            }
+        })
+
+    arcs.append('svg:text')
+        .attr("text-anchor", "middle")
+        .attr('font-size', '23px')
+        .attr('fill', '#282828')
+        .attr('x', 20)
+        .attr('y', -10)
+        .text(function (d) {
+            if(d.data.label === 'Ev') {
+                return 'MIN'
             }
         })
 
     arcs.append("svg:text")
         .attr("class", "labels")//add a label to each slice
-        .attr("fill", "grey")
+        .attr("fill", "#8e8e8e")
         .attr('transform', "translate(" + radius + ", 0)")
-        // .attr('transform', "translate(94.82978171439602, -54.75)")
         .text(function(d, i) {
-            if (data[i].label === 'Max') return dataFromServer[2].value;
+            if (data[i].label === 'Max') return dataFromServer[2].value+'MIN';
         })
-    // .attr("text-anchor", "start")
 
-
-    const degreesToRadians = (degree) => {
-        const pi = Math.PI;
-        return degree * (pi / 180)
+    function toRadians(degrees) {
+        return degrees * (Math.PI / 180);
     }
 
-    const x = Math.cos(data[2].value)*radius;
-    const y = Math.sin(data[2].value)*radius;
+    const x = Math.floor(radius * Math.cos(toRadians(3*data[2].value)));
+    const y = Math.floor(radius * Math.sin(toRadians(3*data[2].value)));
 
     arcs.append("svg:text")
         .attr("class", "labels")//add a label to each slice
-        .attr("fill", "grey")
+        .attr("fill", "#8e8e8e")
         .attr('transform', "translate(" + x + ", " + -y + ")")
-        .text(function(d, i) { if (data[i].label === 'Average') return dataFromServer[1].value; })
+        .text(function(d, i) { if (data[i].label === 'Average') return dataFromServer[1].value + 'MIN'; })
 </script>
 </body>
 </html>
