@@ -36,9 +36,7 @@ function gaugeChart() {
 
       // Otherwise, create the skeletal chart.
       var gEnter = svg.enter().append("svg").append("g");
-      console.log("##########", gEnter);
       var arcGEnter = gEnter.append("g").attr("class", "arc");
-      console.log("########## arcGEnter", arcGEnter);
 
       arcGEnter.append("path").attr("class", "bg-arc");
       arcGEnter
@@ -55,7 +53,9 @@ function gaugeChart() {
       arcGEnter
         .selectAll(".lines")
         .data(
-          arcScale.ticks(5).map(function (d) {
+          arcScale.ticks(2).map(function (d) {
+            //
+            // n개의 구간
             return { score: d };
           })
         )
@@ -63,10 +63,10 @@ function gaugeChart() {
         .append("path")
         .attr("class", "lines");
 
-      // TODO: #####################
+      // TODO: label on the edge
       arcGEnter
         .selectAll(".ticks")
-        .data(arcScale.ticks(5))
+        .data(arcScale.ticks(10)) // 100 % n 개의 ticks
         .enter()
         .append("text")
         .style("fill", "red")
@@ -154,6 +154,8 @@ function gaugeChart() {
         .style("fill", "none")
         .style("stroke-width", 2.5)
         .style("stroke", "#fff");
+
+      // TODO: label on the edge
       arcG
         .selectAll(".ticks")
         .style("font-size", "12px")

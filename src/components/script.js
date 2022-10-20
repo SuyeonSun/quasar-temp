@@ -55,16 +55,16 @@ function gaugeChart() {
         });
       arcGEnter.append("text").attr("class", "arc-label"); // center text
 
-      arcGEnter
-        .selectAll(".lines")
-        .data(
-          arcScale.ticks(3).map(function (d) {
-            return { score: 30 }; // score에 따라 나뉘는 line 위치 결정됨 // TODO score 값 바꾸면 line 위치 바뀜
-          })
-        )
-        .enter()
-        .append("path")
-        .attr("class", "lines"); // lines style class 주지 않기
+      // arcGEnter
+      //   .selectAll(".lines")
+      //   // .data(
+      //   //   arcScale.ticks(5).map(function (d) {
+      //   //     return { score: 30 }; // score에 따라 나뉘는 line 위치 결정됨 // TODO score 값 바꾸면 line 위치 바뀜
+      //   //   })
+      //   // )
+      //   .enter()
+      //   .append("path")
+      //   .attr("class", "lines"); // lines style class 주지 않기
 
       arcGEnter
         .selectAll(".ticks")
@@ -111,12 +111,12 @@ function gaugeChart() {
         .datum({
           score: data[0],
           startAngle: arcMin,
-          endAngle: arcScale(data[0]), // TODO: data가 끝나는 지점
+          endAngle: arcScale(57), // TODO: data가 끝나는 지점
         })
         .transition()
         .duration(750)
         .style("fill", function (d) {
-          return colorScale(d.score);
+          return colorScale(d.score); // TODO: value 색상 채우기
         })
         .style("opacity", function (d) {
           return d.score < dataDomain[0] ? 0 : 1;
