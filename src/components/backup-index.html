@@ -32,7 +32,7 @@
             .innerRadius(50)
             .outerRadius(80);
 
-        d3.select("#chart").datum([randNumberBounds(0, 100)]).call(gauge);
+        d3.select("#chart").datum([randNumberBounds(0, 0)]).call(gauge);
 
         function resize() {
             var gWidth = Math.min(d3.select("#chart").node().offsetWidth, 260);

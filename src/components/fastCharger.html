@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,15 +27,15 @@
     var color = ['#00adff', '#dbdbdb', '#f4f4f4']
 
     const dataFromServer = [
-        { label: 'Ev', value: 24 },
-        { label: 'Average', value: 47 },
-        { label: 'Max', value: 60 },
+        { label: 'Ev', value: 60 }, // 24
+        { label: 'Average', value: 300 }, // 47
+        { label: 'Max', value: 780 }, // 60
     ]
 
     const data = [
-        { label: 'Ev', value: 24 }, // 40
-        { label: 'Average', value: 33 }, // 0
-        { label: 'Max', value: 13 }, // 20
+        { label: 'Ev', value: 60 }, // 24
+        { label: 'Average', value: 240 }, // 33
+        { label: 'Max', value: 280 }, // 13
     ];
 
     // https://mygumi.tistory.com/346
@@ -48,14 +49,13 @@
         .attr('transform', 'translate(' + (width / 2) +  ',' + (height / 2) + ')');    //move the center of the pie chart from 0, 0 to radius, radius
 
     var arc = d3.arc()              //this will create <path> elements for us using arc data
-        .innerRadius(79)
+        .innerRadius(90)
         .outerRadius(radius - 10) // full height semi pie
 
     // TODO: 수정 필요
     var pie = d3.pie()           //this will create arc data for us given a list of values
         .startAngle(-90 * (Math.PI/180))
         .endAngle(90 * (Math.PI/180))
-        // .padAngle(.02) // some space between slices
         .sort(null) //No! we don't want to order it by size
         .value(function(d) {
             const ev = dataFromServer[0].value
@@ -74,7 +74,7 @@
                     return d.value
                 }
             }
-        });    //we must tell it out to access the value of each element in our data array
+        });
 
 
     var arcs = vis.selectAll("g.slice")     //this selects all <g> elements with class slice (there aren't any yet)
@@ -88,51 +88,47 @@
         .attr("fill", function(d, i) { return color[i]; } ) //set the color for each slice to be chosen from the color function defined above
         .attr("d", arc);                                    //this creates the actual SVG path using the associated data (pie) with the arc drawing function
 
-
+    // TODO: 가운데 텍스트
     arcs.append('svg:text')
         .attr("text-anchor", "middle")
         .attr('font-size', '2em')
         .attr('fill', '#282828')
-        .attr('x', -20)
+        // .attr('x', -20)
         .attr('y', -10)
         .text(function (d) {
+            const evHourText = Math.floor(d.data.value / 60) === 0 ? '' : Math.floor(d.data.value / 60)+'h';
+            const evMinText = Math.floor(d.data.value % 60) === 0 ? '' : Math.floor(d.data.value % 60)+'MIN';
             if(d.data.label === 'Ev') {
-                return d.data.value
+                return evHourText + evMinText
             }
         })
 
-    arcs.append('svg:text')
-        .attr("text-anchor", "middle")
-        .attr('font-size', '23px')
-        .attr('fill', '#282828')
-        .attr('x', 20)
-        .attr('y', -10)
-        .text(function (d) {
-            if(d.data.label === 'Ev') {
-                return 'MIN'
-            }
-        })
-
+    // TODO: 평균 텍스트
     arcs.append("svg:text")
         .attr("class", "labels")//add a label to each slice
-        .attr("fill", "#8e8e8e")
+        .attr("fill", "#282828")
+        .attr('transform', "translate(" + radius + ", " + -(radius - 30)  + ")") // 평균 label의 고정
+        .text(function(d, i) {
+            const avHourText = Math.floor(dataFromServer[1].value / 60) === 0 ? '' : Math.floor(dataFromServer[1].value / 60) + 'h'
+            const avMinText = Math.floor(dataFromServer[1].value % 60) === 0 ? '' : Math.floor(dataFromServer[1].value % 60) + 'MIN'
+
+            if (data[i].label === 'Average') {
+                return avHourText + avMinText;
+            }
+        })
+
+    // arcs.insert('rect','text').attr('x', function(d) {return })
+
+    // TODO: Max 텍스트
+    arcs.append("svg:text")
+        .attr("class", "labels")//add a label to each slice
+        .attr("fill", "black")
         .attr('transform', "translate(" + radius + ", 0)")
         .text(function(d, i) {
-            if (data[i].label === 'Max') return dataFromServer[2].value+'MIN';
+            const maxHourText = Math.floor(dataFromServer[2].value / 60) === 0 ? '' : Math.floor(dataFromServer[2].value / 60) + 'h'
+            const maxMinText = Math.floor(dataFromServer[2].value % 60) === 0 ? '' : Math.floor(dataFromServer[2].value % 60) + 'MIN'
+            if (data[i].label === 'Max') return maxHourText + maxMinText;
         })
-
-    function toRadians(degrees) {
-        return degrees * (Math.PI / 180);
-    }
-
-    const x = Math.floor(radius * Math.cos(toRadians(3*data[2].value)));
-    const y = Math.floor(radius * Math.sin(toRadians(3*data[2].value)));
-
-    arcs.append("svg:text")
-        .attr("class", "labels")//add a label to each slice
-        .attr("fill", "#8e8e8e")
-        .attr('transform', "translate(" + x + ", " + -y + ")")
-        .text(function(d, i) { if (data[i].label === 'Average') return dataFromServer[1].value + 'MIN'; })
 </script>
 </body>
 </html>
