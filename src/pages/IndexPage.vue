@@ -1,7 +1,6 @@
 <script setup>
 import EviqPick10Box from "components/EviqPick10Box";
 import { useMainPageStore } from "stores/main-page-store";
-import { onMounted } from "vue";
 import { storeToRefs } from "pinia";
 import RadarChart from "components/RadarChart";
 import ChargingTimeGraph from "components/ChargingTimeGraph";
@@ -10,18 +9,19 @@ import SalesByCountryGraph from "components/SalesByCountryGraph";
 import SafetyIndexDetailsGraphBox from "components/SafetyIndexDetailsGraphBox";
 import RangeAfterFullChargingChartBox from "components/RangeAfterFullChargingChartBox";
 import SafetyIndexScoreBox from "components/SafetyIndexScoreBox";
-import RingChartWithTextCenterBox from "components/ring-chart-with-text-center-box";
+import ChargingTimeChartBox from "components/chargingTimeChartBox";
 
 const store = useMainPageStore();
 const { eviqPickChartInfoList } = storeToRefs(store);
-
-onMounted(() => {
-  store.getEviqPickChartInfoList();
-});
 </script>
 
 <template>
   <q-page class="q-pa-xl">
+    <div style="border: 1px solid black" class="q-mb-lg">
+      <div class="text-bold">charging time chart box</div>
+      <charging-time-chart-box></charging-time-chart-box>
+    </div>
+
     <div style="border: 1px solid black">
       <div class="text-bold">EVIQ's Pick 10</div>
       <div v-for="info in eviqPickChartInfoList">
@@ -64,9 +64,9 @@ onMounted(() => {
       <safety-index-score-box></safety-index-score-box>
     </div>
 
-    <div class="q-mt-lg">
-      <div class="text-bold">Ring Chart With Text Center Graph</div>
-      <ring-chart-with-text-center-box></ring-chart-with-text-center-box>
-    </div>
+    <!--    <div class="q-mt-lg">-->
+    <!--      <div class="text-bold">Ring Chart With Text Center Graph</div>-->
+    <!--      <ring-chart-with-text-center-box></ring-chart-with-text-center-box>-->
+    <!--    </div>-->
   </q-page>
 </template>

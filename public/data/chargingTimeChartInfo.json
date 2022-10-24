@@ -1,0 +1,12 @@
+{
+  "fastCharger": [
+    {"order":"1", "label":  "ev", "value":  20},
+    {"order":"3", "label":  "max", "value":  60},
+    {"order":"2", "label":  "average", "value":  0}
+  ],
+  "slowCharger": [
+    {"order":"1", "label":  "ev", "value":  20},
+    {"order":"3", "label":  "max", "value":  60},
+    {"order":"2", "label":  "average", "value":  30}
+  ]
+}
