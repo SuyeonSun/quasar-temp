@@ -1,13 +1,13 @@
 <template>
-  <slow-charger
+  <fast-charger-chart
     :dataFromServer="chargingTimeChartInfo.fastCharger"
-  ></slow-charger>
+  ></fast-charger-chart>
 </template>
 
 <script setup>
 import { useChargingTimeStore } from "stores/charging-time-store";
 import { computed, onMounted } from "vue";
-import SlowCharger from "components/slowCharger.vue";
+import FastChargerChart from "components/fastChargerChart";
 
 const chargingTimeStore = useChargingTimeStore();
 

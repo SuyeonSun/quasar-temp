@@ -45,7 +45,7 @@ watch(
 );
 
 const width = 400;
-const height = 230; //this is the double because are showing just the half of the pie
+const height = 230;
 const radius = Math.min(width, height) / 2;
 </script>
 
