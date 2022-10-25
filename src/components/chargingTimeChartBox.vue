@@ -1,7 +1,5 @@
 <template>
-  <fast-charger-chart
-    :fastChargerChargingTimeChartInfo="chargingTimeChartInfo.fastCharger"
-  ></fast-charger-chart>
+  <fast-charger-chart></fast-charger-chart>
 </template>
 
 <script setup>
@@ -14,10 +12,6 @@ const chargingTimeStore = useChargingTimeStore();
 onMounted(async () => {
   await chargingTimeStore.getChargingTimeChartInfo();
 });
-
-const chargingTimeChartInfo = computed(
-  () => chargingTimeStore.chargingTimeChartInfo
-);
 </script>
 
 <style scoped></style>
