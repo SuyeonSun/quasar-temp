@@ -17,7 +17,10 @@ import { onMounted } from "vue";
 
 const store = useEvDetailStore();
 
-const { rangeAfterFullChargingGraphInfo } = storeToRefs(store);
+// const chargingTimeChartInfo = computed(
+//     () => chargingTimeStore.chargingTimeChartInfo
+// );
+const { rangeAfterFullChargingGraphInfo } = storeToRefs(store); // computed로 변환
 
 onMounted(() => {
   store.getRangeAfterFullChargingGraphInfo();

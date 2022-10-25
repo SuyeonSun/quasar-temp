@@ -4,7 +4,7 @@ import axios from "axios";
 export const useEvDetailStore = defineStore("evDetailStore", {
   state: () => ({
     // 1
-    evAverageComparisonGraphInfo: [],
+    evAverageComparisonGraphInfo: [], // TODO
 
     // 2
     rangeAfterFullChargingGraphInfo: {},
@@ -15,6 +15,7 @@ export const useEvDetailStore = defineStore("evDetailStore", {
   actions: {
     // 1
     async getEvAverageComparisonGraphInfo() {
+      // TODO
       const response = await axios.get("/data/ev-average-comparison.json");
       this.evAverageComparisonGraphInfo = response.data;
     },

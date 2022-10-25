@@ -8,11 +8,16 @@ import { Radar } from "vue-chartjs";
 import { Chart, registerables } from "chart.js";
 import { useEvDetailStore } from "stores/ev-detail-store";
 import { storeToRefs } from "pinia";
+import { computed } from "vue";
 Chart.register(...registerables);
 
 const store = useEvDetailStore();
 
-const { evAverageComparisonGraphInfo } = storeToRefs(store);
+const { evAverageComparisonGraphInfo } = storeToRefs(store); // computed로 변경
+
+// const chargingTimeChartInfo = computed(
+//     () => chargingTimeStore.chargingTimeChartInfo
+// );
 
 onMounted(async () => {
   await store.getEvAverageComparisonGraphInfo();

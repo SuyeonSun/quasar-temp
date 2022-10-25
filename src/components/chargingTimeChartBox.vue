@@ -1,6 +1,6 @@
 <template>
   <fast-charger-chart
-    :dataFromServer="chargingTimeChartInfo.fastCharger"
+    :fastChargerChargingTimeChartInfo="chargingTimeChartInfo.fastCharger"
   ></fast-charger-chart>
 </template>
 

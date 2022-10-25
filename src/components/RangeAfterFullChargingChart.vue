@@ -65,6 +65,12 @@ const chartData = ref({
 });
 
 const chartOptions = {
+  title: {
+    display: true,
+    text: "Ice Cream Truck",
+    position: "bottom",
+  },
+
   indexAxis: "y",
   responsive: true,
   // maintainAspectRatio: true,
@@ -90,7 +96,11 @@ const chartOptions = {
       display: false,
     },
     tooltip: {
-      enabled: false,
+      //
+      position: "nearest",
+      //
+
+      enabled: true, // TODO: false
     },
     // datalabels
     datalabels: {

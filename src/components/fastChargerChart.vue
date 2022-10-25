@@ -1,15 +1,17 @@
 <template>
+  <div>{{ props.fastChargerChargingTimeChartInfo }}</div>
+  <div>{{ data }}</div>
   <div id="chart" style="width: 400px; height: 230px"></div>
 </template>
 
 <script setup>
-import { ref, watch } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { useChargingTimeStore } from "stores/charging-time-store";
 
 const chargingTimeStore = useChargingTimeStore();
 
 const props = defineProps({
-  dataFromServer: Object,
+  fastChargerChargingTimeChartInfo: Object,
 });
 
 const data = ref([
@@ -20,7 +22,7 @@ const data = ref([
 
 const dataFromServer = ref();
 watch(
-  () => props.dataFromServer,
+  () => props.fastChargerChargingTimeChartInfo,
   (value) => {
     dataFromServer.value = value;
 
@@ -32,13 +34,11 @@ watch(
         dataFromServer.value[1].value -
         (dataFromServer.value[0].value +
           (dataFromServer.value[2].value - dataFromServer.value[0].value));
-      // } else if (dataFromServer.value[0].value >= dataFromServer.value[2].value) {
     } else {
       data.value[2].value = 0;
       data.value[1].value =
         dataFromServer.value[1].value - dataFromServer.value[0].value;
     }
-
     // set data의 ev
     data.value[0].value = dataFromServer.value[0].value;
   }
@@ -47,6 +47,10 @@ watch(
 const width = 400;
 const height = 230;
 const radius = Math.min(width, height) / 2;
+
+onMounted(() => {
+  const vis = d3.select("#chart").append("svg").data([data]);
+});
 </script>
 
 <style scoped></style>
