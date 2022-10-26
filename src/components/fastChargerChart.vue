@@ -1,5 +1,8 @@
 <template>
-  <div id="chart" style="width: 400px; height: 230px"></div>
+  <div
+    id="chart"
+    style="display: flex; align-items: center; justify-content: center"
+  ></div>
 </template>
 
 <script setup>
@@ -9,19 +12,17 @@ import * as d3 from "d3";
 
 const chargingTimeStore = useChargingTimeStore();
 
-const props = defineProps({
-  fastChargerChargingTimeChartInfo: Object,
-});
-
-const data = ref([
+const chartData = ref([
   { order: 1, label: "Ev", value: undefined },
   { order: 3, label: "Max", value: undefined },
   { order: 2, label: "Average", value: undefined },
 ]);
 
-const width = 400;
-const height = 230; //this is the double because are showing just the half of the pie
-const radius = Math.min(width, height) / 2;
+const extraWidth = 90;
+const radius = 100;
+const width = radius * 2 + extraWidth;
+const height = radius;
+
 const color = ["#00adff", "#f4f4f4", "#dbdbdb"];
 
 watch(
@@ -29,66 +30,66 @@ watch(
   (value) => {
     // set data의 average // set data의 max
     if (value[0].value < value[2].value) {
-      data.value[2].value = value[2].value - value[0].value;
-      data.value[1].value =
+      chartData.value[2].value = value[2].value - value[0].value;
+      chartData.value[1].value =
         value[1].value - (value[0].value + (value[2].value - value[0].value));
     } else {
-      data.value[2].value = 0;
-      data.value[1].value = value[1].value - value[0].value;
+      chartData.value[2].value = 0;
+      chartData.value[1].value = value[1].value - value[0].value;
     }
     // set data의 ev
-    data.value[0].value = value[0].value;
+    chartData.value[0].value = value[0].value;
 
     const vis = d3
       .select("#chart")
-      .append("svg") //create the SVG element inside the <body>
-      .data([data.value]) //associate our data with the document
-      .attr("width", width) //set the width and height of our visualization (these will be attributes of the <svg> tag
+      .append("svg")
+      .data([chartData.value])
+      .attr("width", width)
       .attr("height", height)
-      // svg:g
-      .append("svg:g") //make a group to hold our pie chart
-      .attr("transform", "translate(" + width / 3 + "," + (height - 20) + ")");
+      .append("svg:g")
+      .attr("transform", "translate(" + radius + "," + radius + ")");
 
     const arc = d3
-      .arc() //this will create <path> elements for us using arc data
-      .innerRadius(80)
-      .outerRadius(radius - 10); // full height semi pie
+      .arc()
+      .innerRadius(radius - radius / 3)
+      .outerRadius(radius);
 
-    // TODO: 수정 필요
     const pie = d3
-      .pie() //this will create arc data for us given a list of values
+      .pie()
       .startAngle(-90 * (Math.PI / 180))
       .endAngle(90 * (Math.PI / 180))
-      // .sort(null) //No! we don't want to order it by size
+      .sort(null)
       .sort(function (a, b) {
         return a.order - b.order;
       })
       .value(function (d) {
-        const ev = value[0].value;
-        const average = value[2].value;
-
-        if (ev < average) {
-          if (d.label === "Average") {
-            return average - ev;
-          } else {
-            return d.value;
-          }
-        } else {
-          if (d.label === "Average") {
-            return 0;
-          } else {
-            return d.value;
-          }
-        }
+        return d.value;
+        // console.log(d);
+        //
+        // const ev = value[0].value;
+        // const average = value[2].value;
+        //
+        // if (ev < average) {
+        //   if (d.label === "Average") {
+        //     return average - ev;
+        //   } else {
+        //     return d.value;
+        //   }
+        // } else {
+        //   if (d.label === "Average") {
+        //     return 0;
+        //   } else {
+        //     return d.value;
+        //   }
+        // }
       });
-    //we must tell it out to access the value of each element in our data array
 
     const arcs = vis
-      .selectAll("g.slice") //this selects all <g> elements with class slice (there aren't any yet)
-      .data(pie) //associate the generated pie data (an array of arcs, each having startAngle, endAngle and value properties)
-      .enter() //this will create <g> elements for every "extra" data element that should be associated with a selection. The result is creating a <g> for every object in the data array
-      .append("svg:g") //create a group to hold each slice (we will have a <path> and a <text> element associated with each slice)
-      .attr("class", "slice") //allow us to style things in the slices (like text)
+      .selectAll("g.slice")
+      .data(pie)
+      .enter()
+      .append("svg:g")
+      .attr("class", "slice")
       .attr("id", function (d, i) {
         return "text" + i;
       });
@@ -96,10 +97,9 @@ watch(
     arcs
       .append("svg:path")
       .attr("fill", function (d, i) {
-        console.log(d, i);
         return color[i];
-      }) //set the color for each slice to be chosen from the color function defined above
-      .attr("d", arc); //this creates the actual SVG path using the associated data (pie) with the arc drawing function
+      })
+      .attr("d", arc);
 
     // TODO: 가운데 텍스트
     arcs
@@ -143,27 +143,30 @@ watch(
       .attr("class", "labels") //add a label to each slice
       .attr("fill", "black")
       .attr("font-size", "17")
-      .attr("transform", "translate(" + radius + ", 0)")
+      .attr("text-anchor", "end")
+      .attr("x", radius + extraWidth - 10)
+      .attr("y", -1)
       .text(function (d, i) {
         if (d.data.label === "Max") return value[1].value + "MIN";
       });
 
     arcs
       .append("rect")
-      .attr("x", radius - 3)
-      .attr("y", -(radius - 13))
-      .attr("width", 56)
-      .attr("height", 20)
+      .attr("x", radius + 25)
+      .attr("y", -radius)
+      .attr("text-anchor", "end")
+      .attr("width", 60)
+      .attr("height", 30)
       .attr("fill", "#f4f4f4");
 
     arcs
       .append("svg:text")
-      .attr("x", radius)
-      .attr("y", -(radius - 30))
       .attr("class", "labels") //add a label to each slice
       .attr("fill", "black")
       .attr("font-size", "17")
-      .attr("style", "width: 100px; height: 100px")
+      .attr("text-anchor", "end")
+      .attr("x", radius + extraWidth - 10)
+      .attr("y", -radius + 20)
       .text(function (d, i) {
         if (d.data.label === "Average") return value[2].value + "MIN";
       });

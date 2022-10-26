@@ -4,7 +4,7 @@
 
 <script setup>
 import { useChargingTimeStore } from "stores/charging-time-store";
-import { computed, onMounted } from "vue";
+import { onMounted } from "vue";
 import FastChargerChart from "components/fastChargerChart";
 
 const chargingTimeStore = useChargingTimeStore();

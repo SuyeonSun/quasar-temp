@@ -1,8 +1,8 @@
 {
   "fastCharger": [
-    {"label":  "ev", "value":  20},
+    {"label":  "ev", "value":  30},
     {"label":  "max", "value":  60},
-    {"label":  "average", "value": 30}
+    {"label":  "average", "value": 50}
   ],
   "slowCharger": [
     {"label":  "ev", "value":  20},
