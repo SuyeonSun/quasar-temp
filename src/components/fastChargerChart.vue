@@ -84,15 +84,11 @@ watch(
         // }
       });
 
-    const arcs = vis
-      .selectAll("g.slice")
-      .data(pie)
-      .enter()
-      .append("svg:g")
-      .attr("class", "slice")
-      .attr("id", function (d, i) {
-        return "text" + i;
-      });
+    const arcs = vis.selectAll("g.slice").data(pie).enter().append("svg:g");
+    // .attr("class", "slice");
+    // .attr("id", function (d, i) {
+    //   return "text" + i;
+    // });
 
     arcs
       .append("svg:path")
@@ -114,6 +110,7 @@ watch(
           return d.data.value;
         }
       });
+
     // TODO: icon
     arcs
       .append("image")
@@ -157,7 +154,7 @@ watch(
       .attr("text-anchor", "end")
       .attr("width", 60)
       .attr("height", 30)
-      .attr("fill", "#f4f4f4");
+      .attr("fill", "#dbdbdb");
 
     arcs
       .append("svg:text")
