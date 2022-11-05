@@ -1,12 +1,41 @@
 <template>
-  <Form v-slot="{ values }">
-    <Field name="selectBox1" v-slot="{ value, field }">
-      <q-select outlined model-value="value" v-bind="field" label="Outlined" />
-    </Field>
-    <Field name="selectBox2" v-slot="{ value, field }"> </Field>
-  </Form>
+  <div class="q-pa-md">
+    <!--    <div style="height: 300px; background-color: skyblue">-->
+    <!--      <pre class="q-ma-none container">{{ scrollInfo }}</pre>-->
+    <!--      <q-scroll-observer @scroll="onScroll" />-->
+    <!--    </div>-->
+    <pre class="q-ma-none container">{{ scrollInfo }}</pre>
+    <q-scroll-area style="width: 400px; height: 200px" class="bg-yellow">
+      ...content expanding over the 500px500px height from container...
+      ...content expanding over the 500px500px height from container...
+      ...content expanding over the 500px500px height from container...
+      ...content expanding over the 500px500px height from container...
+      ...content expanding over the 500px500px height from container...
+      ...content expanding over the 500px500px height from container...
+      ...content expanding over the 500px500px height from container...
+      ...content expanding over the 500px500px height from container...
+      ...content expanding over the 500px500px height from container...
+      ...content expanding over the 500px500px height from container...
+      ...content expanding over the 500px500px height from container...
+      ...content expanding over the 500px500px height from container...
+      ...content expanding over the 500px500px height from container...
+      ...content expanding over the 500px500px height from container...
+      <q-scroll-observer @scroll="onScroll" />
+    </q-scroll-area>
+  </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { ref } from "vue";
 
-<style scoped></style>
+const scrollInfo = ref({});
+
+const onScroll = (info) => {
+  scrollInfo.value = info;
+};
+</script>
+
+<style lang="sass" scoped>
+.container
+  font-size: 10px
+</style>
