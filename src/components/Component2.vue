@@ -1,5 +1,10 @@
 <template>
   <div class="q-pa-md full-width">
+    <div id="test">
+      <p>Click the button to get offsetTop for the test div.</p>
+      <q-btn @click="getOffsetTop">get offset top</q-btn>
+    </div>
+
     <div class="row q-gutter-md q-mb-md">
       <q-btn
         :label="`Animate to menu1`"
@@ -19,7 +24,7 @@
     </div>
 
     <q-scroll-area ref="scrollAreaRef" style="height: 600px">
-      <div class="bg-red-2" ref="test1">
+      <div class="bg-red-2">
         Lorem Ipsum is simply dummy text of the printing and typesetting
         industry. Lorem Ipsum has been the industry's standard dummy text ever
         since the 1500s, when an unknown printer took a galley of type and
@@ -138,9 +143,16 @@ export default {
     const position = ref(378);
     const scrollAreaRef = ref(null);
 
+    const getOffsetTop = () => {
+      const test = document.getElementById("test");
+      console.log("===========", test.offsetTop);
+    };
+
     return {
       position,
       scrollAreaRef,
+
+      getOffsetTop,
 
       animateScroll(v) {
         scrollAreaRef.value.setScrollPosition("vertical", v, 300);
