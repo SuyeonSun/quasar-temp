@@ -1,5 +1,5 @@
 <template>
-  <q-page class="column justify-center items-center">
+  <q-page class="column">
     <component1></component1>
     <component2></component2>
     <component3> </component3>
