@@ -10,8 +10,8 @@
       </q-header>
 
       <!-- container -->
-      <q-page-container>
-        <q-page padding style="padding-top: 66px">
+<!--      <q-page-container>-->
+<!--        <q-page padding style="padding-top: 66px">-->
           <q-page-sticky expand position="top">
             <q-toolbar class="bg-accent text-white">
               <q-toolbar-title>
@@ -23,8 +23,8 @@
           <p v-for="n in 15" :key="n">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit nihil praesentium molestias a adipisci, dolore vitae odit, quidem consequatur optio voluptates asperiores pariatur eos numquam rerum delectus commodi perferendis voluptate?
           </p>
-        </q-page>
-      </q-page-container>
+<!--        </q-page>-->
+<!--      </q-page-container>-->
     </q-layout>
   </div>
 </template>
