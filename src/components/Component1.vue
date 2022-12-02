@@ -1,11 +1,28 @@
 <script setup>
-import {ref} from 'vue';
+import {ref, onMounted} from 'vue';
+import {useAdminUserStore} from "stores/admin-user-store";
+import {storeToRefs} from "pinia";
 
+const adminUserStore = useAdminUserStore()
+
+const {adminUserRightsStatus} = storeToRefs(adminUserStore)
+
+onMounted(() => {
+  adminUserStore.getAdminUserRightsStatus()
+})
 const val = ref(true)
+
+// const dashBoard = {
+//   read: true,
+//   update: true,
+//   delete: true,
+//   write: true
+// }
 </script>
 
 <template>
   <div style="width: 600px">
+    {{adminUserRightsStatus}}
   <table style="width: 100%;">
     <tr>
       <td colspan="2" class="text-center" style="background-color:#FAF9Fb">메뉴</td>

@@ -1,0 +1,20 @@
+{
+  "dashBoard": {
+    "read": 1, "update": 1, "delete": 1, "write": 1
+  },
+  "evStation": {
+    "read": 1, "update": 1, "delete": 1, "write": 1
+  },
+  "evCharger": {
+    "read": 1, "update": 1, "delete": 1, "write": 1
+  },
+  "chargingHistory": {
+    "read": 1, "update": 1, "delete": 1, "write": 1
+  },
+  "onlineUser": {
+    "read": 1, "update": 1, "delete": 1, "write": 1
+  },
+  "adminUser": {
+    "read": 1, "update": 1, "delete": 1, "write": 1
+  }
+}
