@@ -1,17 +1,16 @@
 export const AdminUserRightsStatus = {
-    SELECTED: {
+    TRUE: {
         index:1,
-        text: 'SELECTED',
+        value: true,
         description: '선택'
     },
-    SELECTABLE: {
+    FALSE: {
         index: 2,
-        text: 'SELECTABLE',
+        value: false,
         description: '선택 가능'
     },
-    NO_RIGHTS: {
+    DISABLED: {
         index: 3,
-        text: 'NO_RIGHTS',
-        description: '권한 없음'
+        description: '비활성화'
     }
 }

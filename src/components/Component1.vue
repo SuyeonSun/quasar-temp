@@ -1,28 +1,52 @@
 <script setup>
-import {ref, onMounted} from 'vue';
+import {ref, onMounted, watch} from 'vue';
 import {useAdminUserStore} from "stores/admin-user-store";
-import {storeToRefs} from "pinia";
+import {convertBoolToNumber, convertNumberToBool} from "src/helper/enum_convert-helper";
+import {AdminUserRightsStatus} from "src/data/admin-user-rights-status";
 
 const adminUserStore = useAdminUserStore()
-
-const {adminUserRightsStatus} = storeToRefs(adminUserStore)
 
 onMounted(() => {
   adminUserStore.getAdminUserRightsStatus()
 })
 const val = ref(true)
 
-// const dashBoard = {
-//   read: true,
-//   update: true,
-//   delete: true,
-//   write: true
-// }
+// true false
+const dashBoard = ref({
+  read: null,
+  update: null,
+  delete: null,
+  write: null
+})
+
+watch(() =>
+  adminUserStore.adminUserDashBoardRights // 1 // 2
+, (value) => {
+        dashBoard.value.read = convertNumberToBool(AdminUserRightsStatus, value.read) // 함수 return 값
+        dashBoard.value.update = convertNumberToBool(AdminUserRightsStatus, value.update)
+        dashBoard.value.delete = convertNumberToBool(AdminUserRightsStatus, value.delete)
+        dashBoard.value.write = convertNumberToBool(AdminUserRightsStatus, value.write)
+    })
+
+// watch(() => dashBoard.value, (value) => {
+//   console.log('======', value)
+// }, {
+//   deep: true
+// })
+
+const onSubmit = () => {
+  const paylaod = {
+    adminUserDashBoardRights: {
+    "read": convertBoolToNumber(AdminUserRightsStatus, dashBoard.value.read),
+      "update": convertBoolToNumber(AdminUserRightsStatus, dashBoard.value.update),
+      "delete": convertBoolToNumber(AdminUserRightsStatus, dashBoard.value.delete),
+      "write": convertBoolToNumber(AdminUserRightsStatus, dashBoard.value.write),
+    }}
+}
 </script>
 
 <template>
   <div style="width: 600px">
-    {{adminUserRightsStatus}}
   <table style="width: 100%;">
     <tr>
       <td colspan="2" class="text-center" style="background-color:#FAF9Fb">메뉴</td>
@@ -35,10 +59,10 @@ const val = ref(true)
     <tr>
       <td rowspan="2">충전인프라 관리</td>
       <td>충전소 관리</td>
-      <td class="text-center"><q-checkbox v-model="val"/></td>
-      <td class="text-center"><q-checkbox v-model="val"/></td>
-      <td class="text-center"><q-checkbox v-model="val"/></td>
-      <td class="text-center"><q-checkbox v-model="val"/></td>
+      <td class="text-center"><q-checkbox v-model="dashBoard.read"/></td>
+      <td class="text-center"><q-checkbox v-model="dashBoard.update"/></td>
+      <td class="text-center"><q-checkbox v-model="dashBoard.delete"/></td>
+      <td class="text-center"><q-checkbox v-model="dashBoard.write"/></td>
     </tr>
 
     <tr>
@@ -99,6 +123,7 @@ const val = ref(true)
       <td class="text-center"><q-checkbox v-model="val"/></td>
     </tr>
   </table>
+    <q-btn label="저장" color="primary" unelevated @click="onSubmit"/>
   </div>
 </template>
 
