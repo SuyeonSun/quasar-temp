@@ -1,4 +1,4 @@
-export const AdminUserRightsStatus = {
+export const Example = {
     TRUE: {
         index:1,
         value: true,
@@ -11,6 +11,7 @@ export const AdminUserRightsStatus = {
     },
     DISABLED: {
         index: 3,
+        value: false,
         description: '비활성화'
     }
 }
