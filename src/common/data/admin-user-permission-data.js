@@ -11,7 +11,7 @@ export const AdminUserPermissionData = {
     },
     DISABLED: {
         index: 3,
-        value: null,
+        value: false,
         description: '비 활성화'
     }
 }
