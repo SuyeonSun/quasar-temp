@@ -51,7 +51,7 @@ const handleInitBtn = () => {
           <td v-if="menu.type === 'evStation'" rowspan="2">충전인프라 관리</td>
           <td v-if="menu.type === 'onlineUser'">회원 목록</td>
           <td v-if="menu.type === 'adminUser'">시스템 설정</td>
-          <td :colspan="(menu.type === 'chargingHistory') && 2">{{ menu.type }}</td>
+          <td :colspan="(menu.type === 'chargingHistory') && 2">{{ menu.title }}</td>
 
           <td class="text-center">
             <q-checkbox
