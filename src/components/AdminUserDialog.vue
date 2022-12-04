@@ -49,7 +49,7 @@ const onSubmit = () => {
       write: adminUser.value.write.isDisable ? 3 : convertValueToIndex(AdminUserPermissionData, adminUser.value.write.permission, evStation.value.write.isDisable),
     },
   }
-  console.log('========= payload', payload)
+  console.log('=== payload', payload)
 
   adminUserStore.setIsOpenAdminUserDialog(false);
 }
@@ -166,7 +166,6 @@ const initPermission = (menu) => {
 <template>
   <q-dialog v-model="isOpenAdminUserDialog">
     <q-card class="q-pa-md" style="width: 800px">
-      <!-- 초기화 버튼 클릭 시 2 -> 1로 변경 -->
       <q-btn label="초기화" color="black" outline @click="handleInitBtn" class="q-mb-sm float-right"/>
 
       <table style="width: 100%;">
@@ -181,35 +180,35 @@ const initPermission = (menu) => {
         <tr>
           <td rowspan="2">충전인프라 관리</td>
           <td>충전소 관리</td>
-          <td class="text-center"><q-checkbox v-model="evStation.read.permission" :disable="evStation.read.isDisable"/></td>
-          <td class="text-center"><q-checkbox v-model="evStation.update.permission" :disable="evStation.update.isDisable"/></td>
-          <td class="text-center"><q-checkbox v-model="evStation.delete.permission" :disable="evStation.delete.isDisable"/></td>
-          <td class="text-center"><q-checkbox v-model="evStation.write.permission" :disable="evStation.write.isDisable"/></td>
+          <td class="text-center"><q-checkbox v-model="evStation.read.permission" :disable="evStation.read.isDisable" :class="evStation.read.isDisable && 'disabled-checkbox'"/></td>
+          <td class="text-center"><q-checkbox v-model="evStation.update.permission" :disable="evStation.update.isDisable" :class="evStation.update.isDisable && 'disabled-checkbox'"/></td>
+          <td class="text-center"><q-checkbox v-model="evStation.delete.permission" :disable="evStation.delete.isDisable" :class="evStation.delete.isDisable && 'disabled-checkbox'"/></td>
+          <td class="text-center"><q-checkbox v-model="evStation.write.permission" :disable="evStation.write.isDisable" :class="evStation.write.isDisable && 'disabled-checkbox'"/></td>
         </tr>
 
         <tr>
           <td>충전기 관리</td>
-          <td class="text-center"><q-checkbox v-model="evCharger.read.permission" :disable="evCharger.read.isDisable" /></td>
-          <td class="text-center"><q-checkbox v-model="evCharger.update.permission" :disable="evCharger.update.isDisable" /></td>
-          <td class="text-center"><q-checkbox v-model="evCharger.delete.permission" :disable="evCharger.delete.isDisable" /></td>
-          <td class="text-center"><q-checkbox v-model="evCharger.write.permission" :disable="evCharger.write.isDisable" /></td>
+          <td class="text-center"><q-checkbox v-model="evCharger.read.permission" :disable="evCharger.read.isDisable" :class="evCharger.read.isDisable && 'disabled-checkbox'"/></td>
+          <td class="text-center"><q-checkbox v-model="evCharger.update.permission" :disable="evCharger.update.isDisable" :class="evCharger.update.isDisable && 'disabled-checkbox'"/></td>
+          <td class="text-center"><q-checkbox v-model="evCharger.delete.permission" :disable="evCharger.delete.isDisable" :class="evCharger.delete.isDisable && 'disabled-checkbox'"/></td>
+          <td class="text-center"><q-checkbox v-model="evCharger.write.permission" :disable="evCharger.write.isDisable" :class="evCharger.write.isDisable && 'disabled-checkbox'"/></td>
         </tr>
 
         <tr>
           <td colspan="2">충전 내역</td>
-          <td class="text-center"><q-checkbox v-model="chargingHistory.read.permission" :disable="chargingHistory.read.isDisable"/></td>
-          <td class="text-center"><q-checkbox v-model="chargingHistory.update.permission" :disable="chargingHistory.update.isDisable"/></td>
-          <td class="text-center"><q-checkbox v-model="chargingHistory.delete.permission" :disable="chargingHistory.delete.isDisable"/></td>
-          <td class="text-center"><q-checkbox v-model="chargingHistory.write.permission" :disable="chargingHistory.write.isDisable"/></td>
+          <td class="text-center"><q-checkbox v-model="chargingHistory.read.permission" :disable="chargingHistory.read.isDisable"  :class="chargingHistory.read.isDisable && 'disabled-checkbox'"/></td>
+          <td class="text-center"><q-checkbox v-model="chargingHistory.update.permission" :disable="chargingHistory.update.isDisable"  :class="chargingHistory.update.isDisable && 'disabled-checkbox'"/></td>
+          <td class="text-center"><q-checkbox v-model="chargingHistory.delete.permission" :disable="chargingHistory.delete.isDisable"  :class="chargingHistory.delete.isDisable && 'disabled-checkbox'"/></td>
+          <td class="text-center"><q-checkbox v-model="chargingHistory.write.permission" :disable="chargingHistory.write.isDisable"  :class="chargingHistory.write.isDisable && 'disabled-checkbox'"/></td>
         </tr>
 
         <tr>
           <td>회원 목록</td>
           <td>온라인 회원 목록</td>
-          <td class="text-center"><q-checkbox v-model="onlineUser.read.permission" :disable="onlineUser.read.isDisable"/></td>
-          <td class="text-center"><q-checkbox v-model="onlineUser.update.permission" :disable="onlineUser.update.isDisable"/></td>
-          <td class="text-center"><q-checkbox v-model="onlineUser.delete.permission" :disable="onlineUser.delete.isDisable"/></td>
-          <td class="text-center"><q-checkbox v-model="onlineUser.write.permission" :disable="onlineUser.write.isDisable"/></td>
+          <td class="text-center"><q-checkbox v-model="onlineUser.read.permission" :disable="onlineUser.read.isDisable"  :class="onlineUser.read.isDisable && 'disabled-checkbox'"/></td>
+          <td class="text-center"><q-checkbox v-model="onlineUser.update.permission" :disable="onlineUser.update.isDisable"  :class="onlineUser.update.isDisable && 'disabled-checkbox'"/></td>
+          <td class="text-center"><q-checkbox v-model="onlineUser.delete.permission" :disable="onlineUser.delete.isDisable"  :class="onlineUser.delete.isDisable && 'disabled-checkbox'"/></td>
+          <td class="text-center"><q-checkbox v-model="onlineUser.write.permission" :disable="onlineUser.write.isDisable"  :class="onlineUser.write.isDisable && 'disabled-checkbox'"/></td>
         </tr>
 
         <tr>
@@ -218,10 +217,10 @@ const initPermission = (menu) => {
 
         <tr>
           <td>관리자 계정 관리</td>
-          <td class="text-center"><q-checkbox v-model="adminUser.read.permission" :disable="adminUser.read.isDisable"/></td>
-          <td class="text-center"><q-checkbox v-model="adminUser.update.permission" :disable="adminUser.update.isDisable"/></td>
-          <td class="text-center"><q-checkbox v-model="adminUser.delete.permission" :disable="adminUser.delete.isDisable"/></td>
-          <td class="text-center"><q-checkbox v-model="adminUser.write.permission" :disable="adminUser.write.isDisable"/></td>
+          <td class="text-center"><q-checkbox v-model="adminUser.read.permission" :disable="adminUser.read.isDisable"  :class="adminUser.read.isDisable && 'disabled-checkbox'"/></td>
+          <td class="text-center"><q-checkbox v-model="adminUser.update.permission" :disable="adminUser.update.isDisable"  :class="adminUser.update.isDisable && 'disabled-checkbox'"/></td>
+          <td class="text-center"><q-checkbox v-model="adminUser.delete.permission" :disable="adminUser.delete.isDisable"  :class="adminUser.delete.isDisable && 'disabled-checkbox'"/></td>
+          <td class="text-center"><q-checkbox v-model="adminUser.write.permission" :disable="adminUser.write.isDisable"  :class="adminUser.write.isDisable && 'disabled-checkbox'"/></td>
         </tr>
       </table>
 
@@ -241,5 +240,11 @@ table, th, td {
 
 .table-header {
   background-color: rgba(0, 173, 255, 0.18);
+}
+
+.disabled-checkbox {
+  :deep(.q-checkbox__bg) {
+    background-color: lightgrey;
+  }
 }
 </style>
