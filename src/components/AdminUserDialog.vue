@@ -9,7 +9,6 @@ const {isOpenAdminUserDialog, permissionList} = storeToRefs(adminUserStore)
 
 watch(() => isOpenAdminUserDialog.value, (value) => {
   value && adminUserStore.getAdminUserPermissionInfo()
-  adminUserStore.setIsOpenAdminUserDialog(false);
 })
 
 const handleCancelBtn = () => {
@@ -18,10 +17,19 @@ const handleCancelBtn = () => {
 
 const onSubmit = () => {
   adminUserStore.postAdminUserPermissionInfo(permissionList.value)
+  adminUserStore.setIsOpenAdminUserDialog(false);
 }
 
 const handleInitBtn = () => {
-  console.log('=== handleInitBtn')
+  permissionList.value = permissionList.value.map((ele) => {
+    return {
+      ...ele,
+      read: {permission: !ele.read.isDisable && true, isDisable: ele.read.isDisable},
+      update: {permission: !ele.update.isDisable && true, isDisable: ele.update.isDisable},
+      delete: {permission: !ele.delete.isDisable && true, isDisable: ele.delete.isDisable},
+      write: {permission: !ele.write.isDisable && true, isDisable: ele.write.isDisable},
+    }
+  })
 }
 </script>
 
