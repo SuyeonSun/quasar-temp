@@ -1,6 +1,5 @@
 import {defineStore} from 'pinia';
 import axios from 'axios';
-import {ref} from "vue";
 
 export const useAdminUserStore = defineStore('adminUserStore', {
     state: () => {
@@ -8,17 +7,7 @@ export const useAdminUserStore = defineStore('adminUserStore', {
 
         return {
             isOpenAdminUserDialog: false,
-
-
             permissionList:[],
-
-            // vs
-
-            evStationPermission: {},
-            evChargerPermission: {},
-            chargingHistoryPermission: {},
-            onlineUserPermission: {},
-            adminUserPermission: {},
         }
     },
 
@@ -34,8 +23,7 @@ export const useAdminUserStore = defineStore('adminUserStore', {
 
                     return {
                         ...ele,
-                        // ele.type === '*' 이면 ''
-                        title: ele.type,
+                        // title: ele.type,
                         read: {permission: ele.read === 1, isDisable: ele.read === 3 },
                         update: {permission: ele.update === 1, isDisable: ele.update === 3 },
                         delete: {permission: ele.delete === 1, isDisable: ele.delete === 3 },
@@ -47,21 +35,17 @@ export const useAdminUserStore = defineStore('adminUserStore', {
             }
         },
 
-        async getAdminUserPermissionInfo2() {
-            try {
-                const response = await axios.get('/data/data-backup.json')
-                this.evStationPermission = response.data[0];
-                this.evChargerPermission = response.data[1];
-                this.chargingHistoryPermission = response.data[2];
-                this.onlineUserPermission = response.data[3];
-                this.adminUserPermission = response.data[4];
-            } catch (error) {
-                console.log('error')
-            }
-        },
-
-        updatePermissionList(idx, type, value){
-            this.permissionList[idx][type].permission = value
+        postAdminUserPermissionInfo(value) {
+            const payload = value.map((ele) => {
+                return {
+                    ...ele,
+                    read: ele.read.isDisable ? 3 : (ele.read.permission ? 1 : 2),
+                    update: ele.update.isDisable ? 3 : (ele.update.permission ? 1 : 2),
+                    delete: ele.delete.isDisable ? 3 : (ele.delete.permission ? 1 : 2),
+                    write: ele.write.isDisable ? 3 : (ele.write.permission ? 1 : 2),
+                }
+            })
+            console.log('==== payload', payload)
         }
     }
 })
