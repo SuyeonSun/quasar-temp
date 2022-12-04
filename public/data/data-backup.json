@@ -1,0 +1,17 @@
+{
+  "evStation": {
+    "read": 1, "update": 2, "delete": 2, "write": 2
+  },
+  "evCharger": {
+    "read": 2, "update": 3, "delete": 2, "write": 2
+  },
+  "chargingHistory": {
+    "read": 2, "update": 2, "delete": 2, "write": 2
+  },
+  "onlineUser": {
+    "read": 2, "update": 2, "delete": 2, "write": 2
+  },
+  "adminUser": {
+    "read": 2, "update": 2, "delete": 3, "write": 3
+  }
+}
