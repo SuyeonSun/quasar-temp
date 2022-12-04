@@ -40,7 +40,7 @@ const handleInitBtn = () => {
 
       <table style="width: 100%;">
         <tr>
-          <td class="text-center table-header">메뉴</td>
+          <td colspan="2" class="text-center table-header">메뉴</td>
           <td class="text-center table-header">보기 권한</td>
           <td class="text-center table-header">수정 권한</td>
           <td class="text-center table-header">삭제 권한</td>
@@ -48,7 +48,11 @@ const handleInitBtn = () => {
         </tr>
 
         <tr v-for="menu in permissionList">
-          <td>{{ menu.type }}</td>
+          <td v-if="menu.type === 'evStation'" rowspan="2">충전인프라 관리</td>
+          <td v-if="menu.type === 'onlineUser'">회원 목록</td>
+          <td v-if="menu.type === 'adminUser'">시스템 설정</td>
+          <td :colspan="(menu.type === 'chargingHistory') && 2">{{ menu.type }}</td>
+
           <td class="text-center">
             <q-checkbox
                 v-model="menu.read.permission"

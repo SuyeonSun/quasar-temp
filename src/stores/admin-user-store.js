@@ -3,8 +3,6 @@ import axios from 'axios';
 
 export const useAdminUserStore = defineStore('adminUserStore', {
     state: () => {
-
-
         return {
             isOpenAdminUserDialog: false,
             permissionList:[],
@@ -20,7 +18,6 @@ export const useAdminUserStore = defineStore('adminUserStore', {
             try {
                 const response = await axios.get('/data/admin-user-permission.json')
                 this.permissionList = response.data.map((ele) => {
-
                     return {
                         ...ele,
                         // title: ele.type,
