@@ -1,14 +1,16 @@
 import {defineStore} from 'pinia';
 import axios from 'axios';
+import {ref} from "vue";
 
 export const useAdminUserStore = defineStore('adminUserStore', {
     state: () => {
+
+
         return {
             isOpenAdminUserDialog: false,
 
 
-            permissionList:[
-            ],
+            permissionList:[],
 
             // vs
 
@@ -29,9 +31,6 @@ export const useAdminUserStore = defineStore('adminUserStore', {
             try {
                 const response = await axios.get('/data/admin-user-permission.json')
                 this.permissionList = response.data.map((ele) => {
-                    const menu = [
-
-                    ]
 
                     return {
                         ...ele,

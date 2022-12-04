@@ -14,10 +14,10 @@ const props = defineProps({
 })
 
 
-watch(() => props.modelValue, (value) => {
-  // adminUserStore.updatePermissionList(props.index, props.type, value)
-  props.changeHandler(props.index, props.type, value)
-})
+// watch(() => props.modelValue, (value) => {
+//   // adminUserStore.updatePermissionList(props.index, props.type, value)
+//   props.changeHandler(props.index, props.type, value)
+// })
 </script>
 
 
