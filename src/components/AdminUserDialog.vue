@@ -147,13 +147,27 @@ watch(() => adminUserStore.adminUserPermission,
 const handleCancelBtn = () => {
   adminUserStore.setIsOpenAdminUserDialog(false);
 }
+
+const handleInitBtn = () => {
+  initPermission(evStation.value)
+  initPermission(evCharger.value)
+  initPermission(chargingHistory.value)
+  initPermission(onlineUser.value)
+  initPermission(adminUser.value)
+}
+
+const initPermission = (menu) => {
+  Object.values(menu).forEach((ele) => {
+    (ele.isDisable === false && ele.permission === false) && (ele.permission = true)
+  })
+}
 </script>
 
 <template>
   <q-dialog v-model="isOpenAdminUserDialog">
     <q-card class="q-pa-md" style="width: 800px">
       <!-- 초기화 버튼 클릭 시 2 -> 1로 변경 -->
-      <q-btn label="초기화" color="black" outline @click="" class="q-mb-sm float-right"/>
+      <q-btn label="초기화" color="black" outline @click="handleInitBtn" class="q-mb-sm float-right"/>
 
       <table style="width: 100%;">
         <tr>
