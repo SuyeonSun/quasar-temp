@@ -1,0 +1,55 @@
+{
+  "adminId": "d63e848f-6972-11ed-a248-0e77f11caa16",
+  "adminTypeList": [
+    {
+      "label": "시스템 총 관리자",
+      "value": 1
+    },
+    {
+      "label": "충전사업자 대표 관리자",
+      "value": 2
+    },
+    {
+      "label": "충전사업자 운영 담당자",
+      "value": 3
+    },
+    {
+      "label": "소속 그룹 운영 담당자",
+      "value": 4
+    },
+    {
+      "label": "고객센터 상담원",
+      "value": 5
+    }
+  ],
+  "optAndMGroup": [
+    {
+      "label": "아우토크립트",
+      "value": "30d43d34-697b-11ed-a248-0e77f11caa16",
+      "memberGroup": [
+        {
+          "label": "여의도 아우토크립트 본사1",
+          "value": "64c9a439-7500-11ed-a248-0e77f11caa16"
+        },
+        {
+          "label": "A아파트1",
+          "value": "fdaab368-7503-11ed-a248-0e77f11caa16"
+        }
+      ]
+    },
+    {
+      "label": "GS칼텍스",
+      "value": "b92e017e-7503-11ed-a248-0e77f11caa16",
+      "memberGroup": [
+        {
+          "label": "여의도 아우토크립트 본사2",
+          "value": "64c9a439-7500-11ed-a248-0e77f11caa16"
+        },
+        {
+          "label": "A아파트2",
+          "value": "fdaab368-7503-11ed-a248-0e77f11caa16"
+        }
+      ]
+    }
+  ]
+}
