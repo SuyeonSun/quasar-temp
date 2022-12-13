@@ -29,6 +29,7 @@ const initialValues = ref({
 
 const handleSelectedAdminTypeValue = (selectedValue) => {
   optAndMGroupList.value.forEach((item) => {
+    searchBarForm.value.setFieldValue(`${item.label}OperatingInstitution`, false);
     searchBarForm.value.setFieldValue(`${item.label}MemberGroup`, undefined);
   })
 
@@ -44,24 +45,21 @@ const handleSelectedAdminTypeValue = (selectedValue) => {
     })
 
   } else {
-    if (selectedValue.value === 4) {
       searchBarForm.value.setFieldValue('allCheckbox', false);
       isDisableAllCheckBox.value = true
       isDisableOperatingInstitution.value = false
       isDisableMemberGroup.value = false
+
+    if (selectedValue.value === 3) {
       optAndMGroupList.value.forEach((item) => {
-        searchBarForm.value.setFieldValue(`${item.label}OperatingInstitution`, false);
-        (item.memberGroup[0].value === 'ALL') && item.memberGroup.shift({label: '전체', value: 'ALL'})
-      })
-    } else {
-      searchBarForm.value.setFieldValue('allCheckbox', true);
-      isDisableAllCheckBox.value = false;
-      isDisableOperatingInstitution.value = false
-      isDisableMemberGroup.value = false
-      optAndMGroupList.value.forEach((item) => {
-        searchBarForm.value.setFieldValue(`${item.label}OperatingInstitution`, true);
         searchBarForm.value.setFieldValue(`${item.label}MemberGroup`, [{label: "전체", value: "ALL"}]);
         (item.memberGroup[0].value !== 'ALL') && item.memberGroup.unshift({label: '전체', value: 'ALL'})
+      })
+    }
+
+    if (selectedValue.value === 4) {
+      optAndMGroupList.value.forEach((item) => {
+        (item.memberGroup[0].value === 'ALL') && item.memberGroup.shift({label: '전체', value: 'ALL'})
       })
     }
   }
@@ -94,11 +92,11 @@ const handleSelectedMemberGroupValue = (selectedValue) => {
 }
 </script>
 
+<!-- if 운영기관 checkbox가 선택되어있지 않았다면, 소속그룹 disabled -->
 <template>
   <div style="width: 900px">
     <Form @submit="" :initial-values="initialValues" ref="searchBarForm" v-slot="{values}">
-        <q-btn label="등록완료" type="submit" unelevated color="primary"/>
-
+      <q-btn label="등록완료" type="submit" unelevated color="primary"/>
       <div class="row items-center">
         <div>관리자 타입</div>
         <div>
